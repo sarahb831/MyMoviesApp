@@ -3,6 +3,17 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   uuid = require("uuid");
 
+const mongoose = require("mongoose");
+const Models = require("./models");
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect(
+  "mongodb://localhost:27017/myMoviesDB",
+  { userNewUrlParser: true }
+);
+
 const app = express();
 
 app.use(bodyParser.json());

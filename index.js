@@ -9,6 +9,8 @@ const Models = require("./models.js");
 const passport = require('passport');
 require('./passport.js');
 
+
+
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -22,6 +24,20 @@ mongoose
   });
 
 const app = express();
+
+const cors = require('cors');
+app.use(cors());
+
+var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) { // not specified on list
+      var message = "The CORS policy for this application doesn't allow " +
+      "access from "+origin;
+      return callback(new Error(message), false);
+  }
+}));
 
 app.use(bodyParser.json());
 

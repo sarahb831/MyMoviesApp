@@ -41,6 +41,7 @@ const cors = require('cors');
 app.use(cors());
 
 var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -49,6 +50,8 @@ app.use(cors({
       "access from "+origin;
       return callback(new Error(message), false);
   }
+  return callback(null, true);
+}
 }));
 
 app.use(bodyParser.json());

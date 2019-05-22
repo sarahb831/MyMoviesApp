@@ -131,8 +131,8 @@ app.get("/movies/directors/:Name", passport.authenticate('jwt',
 }
 */
 
-app.post("/users", passport.authenticate('jwt', {session:false}),
-function(req, res) {
+app.post("/users", function(req, res) {
+  var hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then(function(user) {
       if (user) {
@@ -140,7 +140,7 @@ function(req, res) {
       } else {
         Users.create({
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday
         })
@@ -283,4 +283,7 @@ app.use(function(err, req, res, next) {
   console.error(err.stack);
 });
 
-app.listen(8080, () => console.log("Your app is running on port 8080"));
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function() {
+  console.log("Listening on Port "+port);
+});

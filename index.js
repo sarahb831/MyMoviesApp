@@ -14,6 +14,7 @@ require('./passport.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+/* use this version for using local db
 mongoose
   .connect(
     "mongodb://127.0.0.1:27017/myMoviesDB",
@@ -22,6 +23,17 @@ mongoose
   .catch(function(err) {
     console.error("mongoose.connect error: " + err);
   });
+*/
+
+// use this version for connecting to MongoDB Atlas
+  mongoose
+    .connect(
+      "mongodb+srv://smbeauchamp:Sundance885!@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true",
+      { useNewUrlParser: true }
+    )
+    .catch(function(err) {
+      console.error("mongoose.connect error: " + err);
+    });
 
 const app = express();
 

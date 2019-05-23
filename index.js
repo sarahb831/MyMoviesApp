@@ -26,7 +26,7 @@ mongoose
 // use this version for connecting to MongoDB Atlas
   mongoose
     .connect(
-      "mongodb+srv://smbeauchamp:Sundance885!@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true",
+      'mongodb+srv://smbeauchamp:Sundance885!@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
       { useNewUrlParser: true }
     )
     .catch(function(err) {
@@ -41,8 +41,8 @@ app.use(validator());
 const cors = require('cors');
 app.use(cors());
 
+/*  comment out to allow all domains to have access
 var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -54,7 +54,7 @@ app.use(cors({
   return callback(null, true);
 }
 }));
-
+*/
 app.use(bodyParser.json());
 
 var auth = require('./auth.js')(app); // so Express is available to auth.js also
@@ -204,12 +204,25 @@ based on JSON in this format:
   Birthday: Date
 }
   */
+  req.checkBody('Username', 'Username is required').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters -' +
+    ' not allowed.').isAlphanumeric();
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('Email', 'Email is required').notEmpty();
+  req.checkBody('Email', 'Email does not appear to be valid').isEmail();
+  // check validation objects for errors
+  var errors = req.validationErrors();
+
+  if (errors) {
+    return res.status(422).json({errors : errors});
+  }
+  var hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
       $set: {
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday
       }

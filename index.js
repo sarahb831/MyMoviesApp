@@ -9,8 +9,6 @@ const Models = require("./models.js");
 const passport = require('passport');
 require('./passport.js');
 
-
-
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -36,6 +34,9 @@ mongoose
     });
 
 const app = express();
+
+const validator = require('express-validator');
+app.use(validator());
 
 const cors = require('cors');
 app.use(cors());
@@ -147,6 +148,19 @@ app.get("/movies/directors/:Name", passport.authenticate('jwt',
 */
 
 app.post("/users", function(req, res) {
+  // validation logic
+  req.checkBody('Username', 'Username is required').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters -' +
+    ' not allowed.').isAlphanumeric();
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('Email', 'Email is required').notEmpty();
+  req.checkBody('Email', 'Email does not appear to be valid').isEmail();
+  // check validation objects for errors
+  var errors = req.validationErrors();
+
+  if (errors) {
+    return res.status(422).json({errors : errors});
+  }
   var hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then(function(user) {

@@ -12,8 +12,8 @@ require('./passport.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-/* use this version for using local db
-mongoose
+/* use this version for using local db */
+/* mongoose
   .connect(
     "mongodb://127.0.0.1:27017/myMoviesDB",
     { useNewUrlParser: true }

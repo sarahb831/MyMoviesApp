@@ -26,7 +26,7 @@ const Users = Models.User;
 // use this version for connecting to MongoDB Atlas
   mongoose
     .connect(
-      'mongodb+srv://smbeauchamp:Sundance885!@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
+      'mongodb+srv://smbeauchamp:ThorLoki&1Cas@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
       { useNewUrlParser: true }
     )
     .catch(function(err) {
@@ -147,7 +147,7 @@ app.get("/movies/directors/:Name", passport.authenticate('jwt',
 }
 */
 
-app.post("/users", function(req, res) {
+app.post('/users', function(req, res) {
   // validation logic
   req.checkBody('Username', 'Username is required').notEmpty();
   req.checkBody('Username', 'Username contains non alphanumeric characters -' +

@@ -146,7 +146,7 @@ app.get("/movies/directors/:Name", passport.authenticate('jwt',
 }
 */
 
-app.post('/users', function(req, res) {
+app.post("/users", function(req, res) {
   // validation logic
   req.checkBody('Username', 'Username is required').notEmpty();
   req.checkBody('Username', 'Username contains non alphanumeric characters -' +

@@ -25,8 +25,7 @@ const Users = Models.User;
 
 // use this version for connecting to MongoDB Atlas
   mongoose
-    .connect(
-      'mongodb+srv://smbeauchamp:ThorLoki&1Cas@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
+    .connect('mongodb+srv://smbeauchamp:Sundance885!@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
       { useNewUrlParser: true }
     )
     .catch(function(err) {

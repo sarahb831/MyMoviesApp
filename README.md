@@ -1,16 +1,16 @@
-#myMoviesAPI
+# myMoviesAPI
 
-##This API provides information on movies, directors and genres. 
-##It
+## This API provides information on movies, directors and genres. 
+## It
  also allows a user to register and create a list of favorite movies.
 
 
 **Description** 
-Get a list of all Movies
+  Get a list of all Movies
 
 
 **URL**
-/movies
+  /movies
 
 
 **Method**

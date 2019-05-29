@@ -8,25 +8,23 @@ This API provides information on movies, directors and genres.  It also allows a
 
 
 #### Description 
-  Get a list of all Movies
+    Get a list of all Movies
 
 
 #### URL
-  /movies
+    /movies
 
 
 #### Method
-  GET
+    GET
 
 
 #### Query Parameters 
-
-  None
+    None
 
 
 #### Request Body Data Format
-
-None
+    None
 
 
 #### Response Body Data Format

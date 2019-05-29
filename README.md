@@ -63,18 +63,12 @@ if-featured properties.
   
       {
   
-        Title : "The Godfather",
-    
+        Title : "The Godfather",    
         Description : "American crime film about the Mafia based on novel by Mario Puzo.",
-    
         Genre : {
-      
           Name: "Crime",
-      
           Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives."
-      
         },
-      
         Director : {
           Name: "Francis Ford Coppola",
           Bio: "Francis Ford Coppola was born in Michigan and has won
@@ -108,35 +102,20 @@ if-featured properties.
 **Example**:
 
   {
-
     Title : "The Godfather",
-  
     Description : "American crime film about the Mafia based on novel by Mario Puzo.",
-    
     Genre : {
-  
       Name: "Crime",
-    
       Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives."
-    
     },
-  
     Director : {
-  
       Name: "Francis Ford Coppola",
-    
       Bio: "Francis Ford Coppola was born in Michigan and has won multiple Oscars.",
-      
       Birth: "1939",
-    
       Death: "-"
-    
     },
-  
     ImagePath : "https://www.rottentomatoes.com/m/godfather",
-  
     Featured : true
-  
   }
 
 ----------------- 

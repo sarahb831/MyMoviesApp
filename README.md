@@ -68,7 +68,8 @@ favorite movies.
         Description : "American crime film about the Mafia based on novel by Mario Puzo.",
         Genre : {
           Name: "Crime",
-          Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives."
+          Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and 
+          their motives."
         },
         Director : {
           Name: "Francis Ford Coppola",
@@ -108,7 +109,8 @@ favorite movies.
     Description : "American crime film about the Mafia based on novel by Mario Puzo.",
     Genre : {
       Name: "Crime",
-      Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives."
+      Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and 
+      their motives."
     },
     Director : {
       Name: "Francis Ford Coppola",

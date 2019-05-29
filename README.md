@@ -102,6 +102,7 @@ if-featured properties.
 **Example**:
 
   {
+  
     Title : "The Godfather",
     Description : "American crime film about the Mafia based on novel by Mario Puzo.",
     Genre : {
@@ -139,13 +140,9 @@ properties.
   {
 
     Name: "Francis Ford Coppola",
-  
     Bio: "Francis Ford Coppola was born in Michigan and has won multiple Oscars.",
-  
     Birth: "1939",
-  
     Death: "-"
-  
   }
 
 ----------------- 
@@ -165,13 +162,9 @@ properties.
   {
 
     "Username" : "Thor", (required)
-  
     "Password" : "Thor123", (required)
-  
     "Email" : "Thor@gmail.com", (required)
-  
     "Birthday" : "2012-08-01"
-  
   }
 
 #### Response Body Data Format 
@@ -181,17 +174,12 @@ properties.
 **Example**:
 
   {
-
+ 
     "Username" : "Thor",
-  
     "Password" : "Thor123",
-  
     "Email" : "Thor@gmail.com",
-  
     "Birthday" : "2012-08-01",
-  
     "FavoriteMovies" : {_id: ObjectId("5cd8cee63e0876acb520d116")}
-  
   }
 
 ----------------- 
@@ -212,13 +200,9 @@ properties.
   {
 
     "Username" : "Thor",
-  
     "Password" : "Thor123",
-  
     "Email" : "MrThor@gmail.com",
-  
     "Birthday" : "2012-08-01"
-  
   }
 
 #### Response Body Data Format 
@@ -229,13 +213,9 @@ properties.
   {
 
     "Username" : "Thor",
-
     "Password" : "Thor123",
-
     "Email" : "MrThor@gmail.com",
-
     "Birthday" : "2012-08-01",
-  
   }
 
 ----------------- 
@@ -258,11 +238,8 @@ properties.
   {
 
     "Username" : "Thor",
-  
     "Password" : "Thor123",
-  
     "FavoriteMovies" : ["5cd8cee63e0876acb520d115"]
-  
   }
 ----------------- 
 #### Description 

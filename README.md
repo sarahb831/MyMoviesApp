@@ -1,42 +1,92 @@
 # myMoviesAPI
 
 ## This API provides information on movies, directors and genres. 
-## It
- also allows a user to register and create a list of favorite movies.
+## It also allows a user to register and create a list of favorite movies.
 
 
-**Description** 
+## Endpoints
+
+
+#### **Description** 
+
   Get a list of all Movies
 
 
-**URL**
+#### **URL**
+
   /movies
 
 
-**Method**
-GET<br>
-Query Parameters: None<br>
-Request Body Data Format: None<br>
-Response Body Data Format: JSON object containing data about all the Movies<br><br>
+#### **Method**
 
-Description: Get data about a single movie based on the movie title<br>
-URL: /movies/[Title]<br>
-Method: GET<br>
-Query Parameters: Title, the title of the movie for which to obtain data<br>
-Request Body Data Format: None<br>
-Response Body Data Format: JSON object containing data about the specified
-movie, containing a title, description, genre, director, image URL and
-if-featured properties.<br>
-  Example:
+**GET**
+
+
+#### **Query Parameters** 
+
+None
+
+
+#### **Request Body Data Format** 
+
+None
+
+
+#### **Response Body Data Format** 
+
+JSON object containing data about all the Movies
+
+
+
+#### **Description** 
+
+Get data about a single movie based on the movie title
+
+
+#### URL 
+
+/movies/[Title]
+
+
+#### Method 
+
+**GET**
+
+
+#### Query Parameters 
+
+**Title**, the title of the movie for which to obtain data
+
+
+#### Request Body Data Format 
+
+None
+
+
+#### Response Body Data Format 
+
+JSON object containing data about the specified movie, containing a title, description, genre, director, image URL and
+if-featured properties.
+
+
+  ** Example**
+  
   {
+  
     Title : "The Godfather",
+    
     Description : "American crime film about the Mafia based on novel by
       Mario Puzo.",
+    
     Genre : {
+      
       Name: "Crime",
+      
       Description: "Crime fiction is a genre that fictionalizes crimes,
         their detection, criminals and their motives."
+      
       },
+      
       Director : {
         Name: "Francis Ford Coppola",
         Bio: "Francis Ford Coppola was born in Michigan and has won
@@ -47,7 +97,8 @@ if-featured properties.<br>
       ImagePath : "https://www.rottentomatoes.com/m/godfather",
       Featured : true
     }
-<br><br>
+    
+    
 Description: Get movie data about a genre by title/genre<br>
 URL: /movies/list/:Genre<br>
 Method: GET<br>

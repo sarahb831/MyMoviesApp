@@ -38,6 +38,7 @@ JSON object containing data about all the Movies
 
 
 
+
 #### **Description** 
 
 Get data about a single movie based on the movie title
@@ -98,10 +99,19 @@ if-featured properties.
       Featured : true
     }
     
-    
-Description: Get movie data about a genre by title/genre<br>
-URL: /movies/list/:Genre<br>
-Method: GET<br>
+
+
+#### Description
+
+Get movie data about a genre by title/genre
+
+#### URL
+
+/movies/list/:Genre<br>
+
+#### Method
+
+**GET**
 Query Parameters: Genre, the genre of movies for which to obtain data<br>
 Request Body Data Format: None<br>
 Response Body Data Format: JSON object containing data about the specified

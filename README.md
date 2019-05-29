@@ -59,23 +59,21 @@ This API provides information on movies, directors and genres.  It also allows a
 if-featured properties.
 
 
-  ** Example**
+  **Example**
   
-  {
+      {
   
-    Title : "The Godfather",
+        Title : "The Godfather",
     
-    Description : "American crime film about the Mafia based on novel by
-      Mario Puzo.",
+        Description : "American crime film about the Mafia based on novel by Mario Puzo.",
     
-    Genre : {
+        Genre : {
       
-      Name: "Crime",
+          Name: "Crime",
       
-      Description: "Crime fiction is a genre that fictionalizes crimes,
-        their detection, criminals and their motives."
+          Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives."
       
-      },
+        },
       
       Director : {
         Name: "Francis Ford Coppola",
@@ -107,42 +105,39 @@ if-featured properties.
   JSON object containing data about the specified movie, containing a title, description, genre, director, image URL and
   if-featured properties.
 
-Example:
+**Example**:
 
-{
+  {
 
-  Title : "The Godfather",
+    Title : "The Godfather",
   
-  Description : "American crime film about the Mafia based on novel by Mario
-    Puzo.",
+    Description : "American crime film about the Mafia based on novel by Mario Puzo.",
     
-  Genre : {
+    Genre : {
   
-    Name: "Crime",
+      Name: "Crime",
     
-    Description: "Crime fiction is a genre that fictionalizes crimes, their
-    detection, criminals and their motives."
+      Description: "Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives."
     
-  },
+    },
   
-  Director : {
+    Director : {
   
-    Name: "Francis Ford Coppola",
+      Name: "Francis Ford Coppola",
     
-    Bio: "Francis Ford Coppola was born in Michigan and has won multiple
-      Oscars.",
+      Bio: "Francis Ford Coppola was born in Michigan and has won multiple Oscars.",
       
-    Birth: "1939",
+      Birth: "1939",
     
-    Death: "-"
+      Death: "-"
     
-  },
+    },
   
-  ImagePath : "https://www.rottentomatoes.com/m/godfather",
+    ImagePath : "https://www.rottentomatoes.com/m/godfather",
   
-  Featured : true
+    Featured : true
   
-}
+  }
 
 ----------------- 
 
@@ -160,19 +155,19 @@ Example:
   JSON object containing data about the specified director, containing a name, biography, birth year, and death year
 properties.
 
-Example:
+  **Example**:
 
-{
+  {
 
-  Name: "Francis Ford Coppola",
+    Name: "Francis Ford Coppola",
   
-  Bio: "Francis Ford Coppola was born in Michigan and has won multiple Oscars.",
+    Bio: "Francis Ford Coppola was born in Michigan and has won multiple Oscars.",
   
-  Birth: "1939",
+    Birth: "1939",
   
-  Death: "-"
+    Death: "-"
   
-}
+  }
 
 ----------------- 
 #### Description 
@@ -186,39 +181,39 @@ Example:
 #### Request Body Data Format
   JSON object holding data about the user to add with username, password, email, date of birth
   
-Example:
+**Example**:
 
-{
+  {
 
-  "Username" : "Thor", (required)
+    "Username" : "Thor", (required)
   
-  "Password" : "Thor123", (required)
+    "Password" : "Thor123", (required)
   
-  "Email" : "Thor@gmail.com", (required)
+    "Email" : "Thor@gmail.com", (required)
   
-  "Birthday" : "2012-08-01"
+    "Birthday" : "2012-08-01"
   
-}
+  }
 
 #### Response Body Data Format 
   JSON object containing data about the user that was added
 
 
-Example:
+**Example**:
 
-{
+  {
 
-  "Username" : "Thor",
+    "Username" : "Thor",
   
-  "Password" : "Thor123",
+    "Password" : "Thor123",
   
-  "Email" : "Thor@gmail.com",
+    "Email" : "Thor@gmail.com",
   
-  "Birthday" : "2012-08-01",
+    "Birthday" : "2012-08-01",
   
-  "FavoriteMovies" : {_id: ObjectId("5cd8cee63e0876acb520d116")}
+    "FavoriteMovies" : {_id: ObjectId("5cd8cee63e0876acb520d116")}
   
-}
+  }
 
 ----------------- 
 #### Description
@@ -233,36 +228,36 @@ Example:
 #### Request Body Data Format 
   JSON object holding data about the user to update with username, password, email, date of birth.
 
-Example:
+**Example**:
 
-{
+  {
 
-  "Username" : "Thor",
+    "Username" : "Thor",
   
-  "Password" : "Thor123",
+    "Password" : "Thor123",
   
-  "Email" : "MrThor@gmail.com",
+    "Email" : "MrThor@gmail.com",
   
-  "Birthday" : "2012-08-01"
+    "Birthday" : "2012-08-01"
   
-}
+  }
 
 #### Response Body Data Format 
   JSON object showing the updated information
 
-Example:
+**Example**:
 
-{
+  {
 
-  "Username" : "Thor",
+    "Username" : "Thor",
 
-  "Password" : "Thor123",
+    "Password" : "Thor123",
 
-  "Email" : "MrThor@gmail.com",
+    "Email" : "MrThor@gmail.com",
 
-  "Birthday" : "2012-08-01",
+    "Birthday" : "2012-08-01",
   
-}
+  }
 
 ----------------- 
 #### Description 
@@ -279,17 +274,17 @@ Example:
 #### Response Body Data Format 
   JSON object showing the updated information
   
-Example:
+**Example**:
 
-{
+  {
 
-  "Username" : "Thor",
+    "Username" : "Thor",
   
-  "Password" : "Thor123",
+    "Password" : "Thor123",
   
-  "FavoriteMovies" : ["5cd8cee63e0876acb520d115"]
+    "FavoriteMovies" : ["5cd8cee63e0876acb520d115"]
   
-}
+  }
 ----------------- 
 #### Description 
   Delete a movie from a user's list of favorites by username and movie ID
@@ -304,6 +299,7 @@ Example:
   None
 #### Response Body Data Format 
   Text message indicating whether or not the movie was successfully deleted from the list of favorites.
+  
 ----------------- 
 #### Description 
   Delete a user from the list of users by username

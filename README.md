@@ -75,15 +75,15 @@ if-featured properties.
       
         },
       
-      Director : {
-        Name: "Francis Ford Coppola",
-        Bio: "Francis Ford Coppola was born in Michigan and has won
+        Director : {
+          Name: "Francis Ford Coppola",
+          Bio: "Francis Ford Coppola was born in Michigan and has won
           multiple Oscars.",
-        Birth: "1939",
-        Death: "-"
-      },
-      ImagePath : "https://www.rottentomatoes.com/m/godfather",
-      Featured : true
+          Birth: "1939",
+          Death: "-"
+        },
+        ImagePath : "https://www.rottentomatoes.com/m/godfather",
+        Featured : true
     }
     
 ----------------- 

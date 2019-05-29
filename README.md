@@ -1,45 +1,45 @@
 # myMovies API
 
-## This API provides information on movies, directors and genres.  It also allows a user to register and create a list of favorite movies.
+This API provides information on movies, directors and genres.  It also allows a user to register and create a list of favorite movies.
 
 
 
 ## Endpoints
 
 
-#### **Description** 
+#### Description 
+Get a list of all Movies
 
-  Get a list of all Movies
 
-
-#### **URL**
+#### URL
 
   /movies
 
 
-#### **Method**
+#### Method
 
-**GET**
-
-
-#### **Query Parameters** 
-
-None
+GET
 
 
-#### **Request Body Data Format** 
+#### Query Parameters 
 
 None
 
 
-#### **Response Body Data Format** 
+#### Request Body Data Format
+
+None
+
+
+#### Response Body Data Format
 
 JSON object containing data about all the Movies
 
 
 
 
-#### **Description** 
+
+#### Description
 
 Get data about a single movie based on the movie title
 
@@ -51,7 +51,7 @@ Get data about a single movie based on the movie title
 
 #### Method 
 
-**GET**
+GET
 
 
 #### Query Parameters 
@@ -112,6 +112,7 @@ Get movie data about a genre by title/genre
 #### Method
 
 **GET**
+
 Query Parameters: Genre, the genre of movies for which to obtain data<br>
 Request Body Data Format: None<br>
 Response Body Data Format: JSON object containing data about the specified

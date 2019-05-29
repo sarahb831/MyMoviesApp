@@ -1,6 +1,7 @@
 # myMovies API
 
-This API provides information on movies, directors and genres.  It also allows a user to register and create a list of favorite movies.
+This API provides information on movies, directors and genres.  It also allows a user to register and create a list of 
+favorite movies.
 
 
 
@@ -55,8 +56,8 @@ This API provides information on movies, directors and genres.  It also allows a
 
 
 #### Response Body Data Format 
-  JSON object containing data about the specified movie, containing a title, description, genre, director, image URL and
-if-featured properties.
+  JSON object containing data about the specified movie, containing a title, description, genre, director, image URL
+  and if-featured properties.
 
 
   **Example**
@@ -96,8 +97,8 @@ if-featured properties.
 #### Request Body Data Format
   None
 #### Response Body Data Format 
-  JSON object containing data about the specified movie, containing a title, description, genre, director, image URL and
-  if-featured properties.
+  JSON object containing data about the specified movie, containing a title, description, genre, director, image URL 
+  and if-featured properties.
 
 **Example**:
 

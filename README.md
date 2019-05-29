@@ -47,18 +47,15 @@ This API provides information on movies, directors and genres.  It also allows a
 
 
 #### Query Parameters 
-
-**Title**, the title of the movie for which to obtain data
+  **Title**, the title of the movie for which to obtain data
 
 
 #### Request Body Data Format 
-
-None
+  None
 
 
 #### Response Body Data Format 
-
-JSON object containing data about the specified movie, containing a title, description, genre, director, image URL and
+  JSON object containing data about the specified movie, containing a title, description, genre, director, image URL and
 if-featured properties.
 
 
@@ -91,21 +88,19 @@ if-featured properties.
       Featured : true
     }
     
-
+----------------- 
 
 #### Description
-
-Get movie data about a genre by title/genre
+  Get movie data about a genre by title/genre
 
 #### URL
-
-/movies/list/:Genre<br>
+  /movies/list/:Genre<br>
 
 #### Method
+  **GET**
 
-**GET**
-
-Query Parameters: Genre, the genre of movies for which to obtain data<br>
+#### Query Parameters 
+  Genre, the genre of movies for which to obtain data<br>
 Request Body Data Format: None<br>
 Response Body Data Format: JSON object containing data about the specified
   movie, containing a title, description, genre, director, image URL and

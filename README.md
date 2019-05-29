@@ -1,7 +1,7 @@
-# myMoviesAPI
+# myMovies API
 
-## This API provides information on movies, directors and genres. 
-## It also allows a user to register and create a list of favorite movies.
+## This API provides information on movies, directors and genres.  It also allows a user to register and create a list of favorite movies.
+
 
 
 ## Endpoints

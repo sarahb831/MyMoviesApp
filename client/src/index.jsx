@@ -1,20 +1,22 @@
+// client/src/index.jsx
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { MainView } from './components/main-view/main-view';
 
 // Import statement indicating need to bundle ./index.scss
 import './index.scss';
 
 // Main component
-class myMoviesApplicaiton extends React.Component {
+class myMoviesApplication extends React.Component {
   render() {
-    return(
-      <div className = "my-movies">
-        <div>Good morning</div>
-      </div>
-    );
+    return <MainView/>;
   }
 }
-//Finds root of app
+
+//Find root of our app using this class name
 const container = document.getElementsByClassName('app-container')[0];
-//Instructs React to render your app in root DOM element
-ReactDOM.render(React.createELement(myMoviesApplication),container);
+
+//Instruct React to render our app in root DOM element
+ReactDOM.render(React.createElement(myMoviesApplication),container);

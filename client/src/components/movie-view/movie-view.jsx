@@ -41,7 +41,7 @@ export class MovieView extends React.Component {
 
         <button
           className = "return-button"
-          onClick = {()=> /* unmount MovieView */
+          onClick = {()=> console.log("clicked")}>
             Return to Main Menu</button>
       </div>
     );

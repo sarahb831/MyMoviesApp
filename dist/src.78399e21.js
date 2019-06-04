@@ -27603,7 +27603,12 @@ function (_React$Component) {
         className: "label"
       }, "Director"), _react.default.createElement("div", {
         className: "value"
-      }, movie.Director.Name)));
+      }, movie.Director.Name)), _react.default.createElement("button", {
+        className: "return-button",
+        onClick: function onClick() {
+          return console.log("clicked");
+        }
+      }, "Return to Main Menu"));
     }
   }]);
 
@@ -27875,7 +27880,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52922" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50541" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

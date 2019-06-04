@@ -14,9 +14,9 @@ export class MainView extends React.Component {
       selectedMovie: null
     };
   }
-
+// change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
   componentDidMount() {
-    axios.get('https://my-movie-app-smb.herokuapp.com/movies')
+    axios.get('http://localhost:3000/movies')
     .then(response => {
       this.setState({
         movies: response.data
@@ -41,8 +41,8 @@ export class MainView extends React.Component {
 
     return (
       <div className = "main-view">
-      // if there is a selectedMovie, assign it to the MovieView movie,
-      // else onClick assign the selectedMovie to movie
+      {/* if there is a selectedMovie, assign it to the MovieView movie,
+       else onClick assign the selectedMovie to movie */}
       {selectedMovie
         ? <MovieView movie={selectedMovie}/>
         : movies.map(movie => (

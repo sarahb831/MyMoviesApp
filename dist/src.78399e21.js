@@ -27510,10 +27510,10 @@ function (_React$Component) {
       // database via the movies endpoint of this API
       var _this$props = this.props,
           movie = _this$props.movie,
-          onClick = _this$props.onClick;
+          _onClick = _this$props.onClick;
       return _react.default.createElement("div", {
-        onclick: function onclick() {
-          return onClick(movie);
+        onClick: function onClick() {
+          return _onClick(movie);
         },
         className: "movie-card"
       }, movie.Title);
@@ -27663,14 +27663,15 @@ function (_React$Component) {
       selectedMovie: null
     };
     return _this;
-  }
+  } // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
+
 
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get('https://my-movie-app-smb.herokuapp.com/movies').then(function (response) {
+      _axios.default.get('http://localhost:3000/movies').then(function (response) {
         _this2.setState({
           movies: response.data
         });
@@ -27699,7 +27700,7 @@ function (_React$Component) {
       });
       return _react.default.createElement("div", {
         className: "main-view"
-      }, "// if there is a selectedMovie, assign it to the MovieView movie, // else onClick assign the selectedMovie to movie", selectedMovie ? _react.default.createElement(_movieView.MovieView, {
+      }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
@@ -27845,8 +27846,8 @@ function (_React$Component) {
 
 var container = document.getElementsByClassName('app-container')[0]; //Instruct React to render our app in root DOM element
 
-_reactDom.default.render(_react.default.createELement(myMoviesApplication), container);
-},{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./index.scss":"index.scss"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render(_react.default.createElement(myMoviesApplication), container);
+},{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./index.scss":"index.scss"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -27874,7 +27875,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52922" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -28049,5 +28050,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map

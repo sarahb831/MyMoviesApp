@@ -33,6 +33,12 @@ export class MainView extends React.Component {
     });
   }
 
+  onMainViewClick() {
+    this.setState({
+      selectedMovie: null
+    });
+  }
+
   render() {
     const {movies, selectedMovie } = this.state;
 
@@ -44,10 +50,14 @@ export class MainView extends React.Component {
       {/* if there is a selectedMovie, assign it to the MovieView movie,
        else onClick assign the selectedMovie to movie */}
       {selectedMovie
-        ? <MovieView movie={selectedMovie}/>
+        ? <MovieView
+            movie={selectedMovie}
+            onClick = {button => this.onMainViewClick()}/>
         : movies.map(movie => (
-        <MovieCard key={movie._id} movie={movie} onClick={movie =>
-          this.onMovieClick(movie)}/>
+          <MovieCard
+            key={movie._id}
+            movie={movie}
+            onClick={movie => this.onMovieClick(movie)}/>
         ))
       }
       </div>

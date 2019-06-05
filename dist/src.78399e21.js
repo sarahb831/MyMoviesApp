@@ -27570,6 +27570,13 @@ function (_React$Component) {
   }
 
   _createClass(MovieView, [{
+    key: "onReturnClick",
+    value: function onReturnClick() {
+      console.log("clicked");
+      movie = null;
+      console.log("movie set to null");
+    }
+  }, {
     key: "render",
     value: function render() {
       var movie = this.props.movie;
@@ -27606,7 +27613,7 @@ function (_React$Component) {
       }, movie.Director.Name)), _react.default.createElement("button", {
         className: "return-button",
         onClick: function onClick() {
-          return console.log("clicked");
+          return onReturnClick();
         }
       }, "Return to Main Menu"));
     }
@@ -27880,7 +27887,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50541" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55929" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -10,6 +10,12 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  onReturnClick() {
+    console.log("clicked");
+    movie = null;
+    console.log("movie set to null")
+  }
+
   render() {
     const { movie } = this.props;
 
@@ -41,8 +47,9 @@ export class MovieView extends React.Component {
 
         <button
           className = "return-button"
-          onClick = {()=> console.log("clicked")}>
-            Return to Main Menu</button>
+          onClick = {()=> movie = null; }>
+          Return to Main Menu
+        </button>
       </div>
     );
   }

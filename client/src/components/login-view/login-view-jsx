@@ -14,7 +14,7 @@ export default function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-    return {
+    return (
       <form>
         <label>
           Username:
@@ -38,6 +38,5 @@ export default function LoginView(props) {
           Submit
         </button>
       </form>
-    };
+    )
   }
-}

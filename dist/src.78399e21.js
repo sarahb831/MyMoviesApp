@@ -29156,7 +29156,7 @@ module.exports = exports["default"];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MovieCard = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -29222,7 +29222,7 @@ function (_React$Component) {
   return MovieCard;
 }(_react.default.Component);
 
-exports.MovieCard = MovieCard;
+exports.default = MovieCard;
 MovieCard.propTypes = {
   movie: _propTypes.default.shape({
     Title: _propTypes.default.string
@@ -29235,7 +29235,7 @@ MovieCard.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MovieView = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -29329,24 +29329,24 @@ function (_React$Component) {
   return MovieView;
 }(_react.default.Component);
 
-exports.MovieView = MovieView;
+exports.default = MovieView;
 },{"react":"../../node_modules/react/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MainView = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _loginView = require("../login-view/login-view");
+var _loginView = _interopRequireDefault(require("../login-view/login-view"));
 
-var _movieCard = require("../movie-card/movie-card");
+var _movieCard = _interopRequireDefault(require("../movie-card/movie-card"));
 
-var _movieView = require("../movie-view/movie-view");
+var _movieView = _interopRequireDefault(require("../movie-view/movie-view"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29431,7 +29431,7 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user;
-      if (!user) return _react.default.createElement(_loginView.LoginView, {
+      if (!user) return _react.default.createElement(_loginView.default, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         }
@@ -29442,13 +29442,13 @@ function (_React$Component) {
       });
       return _react.default.createElement("div", {
         className: "main-view"
-      }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
+      }, selectedMovie ? _react.default.createElement(_movieView.default, {
         movie: selectedMovie,
         onClick: function onClick(button) {
           return _this3.onMainViewClick();
         }
       }) : movies.map(function (movie) {
-        return _react.default.createElement(_movieCard.MovieCard, {
+        return _react.default.createElement(_movieCard.default, {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
@@ -29462,7 +29462,7 @@ function (_React$Component) {
   return MainView;
 }(_react.default.Component);
 
-exports.MainView = MainView;
+exports.default = MainView;
 },{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","../login-view/login-view":"components/login-view/login-view.scss","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -29553,7 +29553,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57591" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58656" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

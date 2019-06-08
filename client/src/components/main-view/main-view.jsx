@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import { LoginView } from  '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -11,7 +12,8 @@ export class MainView extends React.Component {
 
     this.state = {
       movies: null,
-      selectedMovie: null
+      selectedMovie: null,
+      user: null
     };
   }
 // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
@@ -33,6 +35,12 @@ export class MainView extends React.Component {
     });
   }
 
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
+
   onMainViewClick() {
     this.setState({
       selectedMovie: null
@@ -40,7 +48,9 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const {movies, selectedMovie } = this.state;
+    const {movies, selectedMovie, user } = this.state;
+
+   if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />; 
 
     // before movies have been loaded
     if (!movies) return <div className = "main-view"/>;

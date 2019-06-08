@@ -1,4 +1,4 @@
 node_modules
 index-placeholder.js
 passport.zip
-.cache
+.cache/**

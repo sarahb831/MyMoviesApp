@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Prop-Types from 'prop-types';
 
 export default function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -55,3 +56,7 @@ export default function LoginView(props) {
     </Form>
     );
   }
+
+  LoginView.propTypes = {
+    onLoggedIn: PropTypes.func.isRequired
+  };

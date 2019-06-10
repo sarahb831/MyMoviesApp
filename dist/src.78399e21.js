@@ -30110,7 +30110,7 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _registrationView = _interopRequireDefault(require("../registration-view/registration-view"));
 
-var _loginView = _interopRequireDefault(require("../login-view/login-view"));
+var _loginView = require("../login-view/login-view");
 
 var _movieCard = _interopRequireDefault(require("../movie-card/movie-card"));
 
@@ -30208,7 +30208,7 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user;
-      console.log(_loginView.default); //   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      console.log(_loginView.LoginView); //   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
       if (!registered) return _react.default.createElement(_registrationView.default, {
         onRegistered: function onRegistered(registered, user) {
@@ -30332,7 +30332,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58546" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60866" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

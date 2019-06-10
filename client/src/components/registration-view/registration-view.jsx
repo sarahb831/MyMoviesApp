@@ -14,8 +14,8 @@ export default function RegistrationView(props) {
 
   const handleRegistration = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/
-    console.log(username, password, email, birthday);
 /* send request to server for registration */
+    props.onRegistrationDone();
   };
 
     return (
@@ -64,3 +64,7 @@ export default function RegistrationView(props) {
       </Form>
     );
   }
+
+  LoginView.propTypes = {
+    onRegistrationDone: PropTypes.func.isRequired
+  };

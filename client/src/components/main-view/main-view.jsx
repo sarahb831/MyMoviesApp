@@ -14,7 +14,8 @@ export default class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      registered: true
     };
   }
 // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
@@ -42,6 +43,13 @@ export default class MainView extends React.Component {
     });
   }
 
+  onRegistered(registered, user) {
+    this.setState({
+      registered: true,
+      user
+    });
+  }
+
   onMainViewClick() {
     this.setState({
       selectedMovie: null
@@ -51,7 +59,8 @@ export default class MainView extends React.Component {
   render() {
     const {movies, selectedMovie, user } = this.state;
 
-   if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+   if (!registered) return <RegistrationView onRegistered={(registered, user) => this.onRegistered(registered, user)} />;
 
     // before movies have been loaded
     if (!movies) return <div className = "main-view"/>;

@@ -29641,8 +29641,9 @@ function RegistrationView(props) {
     e.preventDefault();
     /* to prevent default refresh of page from this method*/
 
-    console.log(username, password, email, birthday);
     /* send request to server for registration */
+
+    props.onRegistrationDone();
   };
 
   return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
@@ -29687,6 +29688,10 @@ function RegistrationView(props) {
     onClick: handleRegistration
   }, "Register"));
 }
+
+LoginView.propTypes = {
+  onRegistrationDone: _propTypes.default.func.isRequired
+};
 },{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","prop-types":"../../node_modules/prop-types/index.js"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -30332,7 +30337,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60866" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50828" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

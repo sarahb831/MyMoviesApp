@@ -10,12 +10,6 @@ export default class MovieView extends React.Component {
     this.state = {};
   }
 
-  onReturnClick() {
-    console.log("clicked");
-    movie = null;
-    console.log("movie set to null")
-  }
-
   render() {
     const { movie, onClick } = this.props;
 

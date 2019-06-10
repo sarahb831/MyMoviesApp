@@ -18,6 +18,11 @@ export default function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  const handleRegistry =(e) => {
+    e.preventDefault();
+    props.onRegistrationClicked();
+  };
+
 
   return (
     <Form>
@@ -49,7 +54,7 @@ export default function LoginView(props) {
       <Button
         variant="secondary"
         type="submit"
-        onClick = {setRegistered(false)}>
+        onClick = {handleRegistry}>
         Not registered yet? Sign up here
       </Button>
 
@@ -58,5 +63,6 @@ export default function LoginView(props) {
   }
 
   LoginView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
+    onLoggedIn: PropTypes.func.isRequired,
+    onRegistrationClicked: PropTypes.func.isRequired
   };

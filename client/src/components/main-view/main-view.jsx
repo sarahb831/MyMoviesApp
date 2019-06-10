@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import RegistrationView from '../registration-view/registration-view';
-import LoginView from  '../login-view/login-view';
+import {LoginView} from  '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
 
@@ -58,8 +58,8 @@ export default class MainView extends React.Component {
 
   render() {
     const {movies, selectedMovie, user } = this.state;
-
-   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+console.log(LoginView);
+//   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
    if (!registered) return <RegistrationView onRegistered={(registered, user) => this.onRegistered(registered, user)} />;
 
     // before movies have been loaded

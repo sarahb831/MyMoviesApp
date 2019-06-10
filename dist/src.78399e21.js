@@ -29602,6 +29602,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -29685,7 +29687,7 @@ function RegistrationView(props) {
     onClick: handleRegistration
   }, "Register"));
 }
-},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","prop-types":"../../node_modules/prop-types/index.js"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -30046,13 +30048,6 @@ function (_React$Component) {
   }
 
   _createClass(MovieView, [{
-    key: "onReturnClick",
-    value: function onReturnClick() {
-      console.log("clicked");
-      movie = null;
-      console.log("movie set to null");
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -30155,7 +30150,8 @@ function (_React$Component) {
     _this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      registered: true
     };
     return _this;
   } // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
@@ -30189,6 +30185,14 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "onRegistered",
+    value: function onRegistered(registered, user) {
+      this.setState({
+        registered: true,
+        user: user
+      });
+    }
+  }, {
     key: "onMainViewClick",
     value: function onMainViewClick() {
       this.setState({
@@ -30204,8 +30208,13 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user;
-      if (!user) return _react.default.createElement(_registrationView.default, null); //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-      // before movies have been loaded
+      console.log(_loginView.default); //   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+      if (!registered) return _react.default.createElement(_registrationView.default, {
+        onRegistered: function onRegistered(registered, user) {
+          return _this3.onRegistered(registered, user);
+        }
+      }); // before movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
@@ -30323,7 +30332,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62119" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58546" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

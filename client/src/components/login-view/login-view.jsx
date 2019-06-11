@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 
@@ -24,42 +25,53 @@ export default function LoginView(props) {
 
 
   return (
-    <Form>
-      <Form.Group controlId="formBasicUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          placeholder="Username"
-          onChange = {e => setUsername(e.target.value)} />
-      </Form.Group>
+    <Container>
+      <Row>
+        <Col></Col>
+        <Col xs={12} md={8}>
+          <Form>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                placeholder="Username"
+                onChange = {e => setUsername(e.target.value)} />
+            </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-        type="password"
-        value={password}
-        placeholder="Password"
-        onChange = {e => setPassword(e.target.value)}/>
-      </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+              type="password"
+              value={password}
+              placeholder="Password"
+              onChange = {e => setPassword(e.target.value)}/>
+            </Form.Group>
 
-      <Button
-        variant="primary"
-        type="submit"
-        onClick = {handleSubmit}>
-        Login
-      </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              className = "primary"
+              onClick = {handleSubmit}>
+              Login
+            </Button>
 
-      <Button
-        variant="secondary"
-        type="submit"
-        onClick = {handleRegistry}>
-        Not registered yet? Sign up here
-      </Button>
+            <Button
+              variant="secondary"
+              type="submit"
+              className = "secondary"
+              onClick = {handleRegistry}>
+              Not registered yet? Sign up here
+            </Button>
 
-    </Form>
-    );
-  }
+          </Form>
+        </Col>
+        <Col>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
 
   LoginView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired,

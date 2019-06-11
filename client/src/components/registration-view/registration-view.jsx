@@ -65,6 +65,6 @@ export default function RegistrationView(props) {
     );
   }
 
-  LoginView.propTypes = {
+  RegistrationView.propTypes = {
     onRegistrationDone: PropTypes.func.isRequired
   };

@@ -3,12 +3,11 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Prop-Types from 'prop-types';
+import PropTypes from 'prop-types';
 
-export function LoginView(props) {
+export default function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ registered, setRegistered ] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/

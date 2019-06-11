@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import RegistrationView from '../registration-view/registration-view';
-import {LoginView} from  '../login-view/login-view';
+import LoginView from  '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
 
@@ -18,7 +18,7 @@ export default class MainView extends React.Component {
       registered: true
     };
   }
-// change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
+// change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {
     axios.get('http://localhost:3000/movies')
     .then(response => {
@@ -43,7 +43,13 @@ export default class MainView extends React.Component {
     });
   }
 
-  onRegistered(registered, user) {
+  onRegistrationClicked() {
+    this.setState({
+      registered: false
+    });
+  }
+  
+  onRegistrationDone(user) {
     this.setState({
       registered: true,
       user
@@ -58,9 +64,12 @@ export default class MainView extends React.Component {
 
   render() {
     const {movies, selectedMovie, user } = this.state;
-console.log(LoginView);
-//   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-   if (!registered) return <RegistrationView onRegistered={(registered, user) => this.onRegistered(registered, user)} />;
+console.log("LoginView");
+    if ((!user) && (registered)) return <LoginView 
+      onLoggedIn={user => this.onLoggedIn(user)}
+      onRegistrationClicked={() => this.onRegistrationClicked()} />;
+
+   if (!registered) return <RegistrationView onRegistrationDone={user => this.onRegistrationDone(user)} />;
 
     // before movies have been loaded
     if (!movies) return <div className = "main-view"/>;

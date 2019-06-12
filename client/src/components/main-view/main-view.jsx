@@ -1,4 +1,5 @@
 import React from 'react';
+
 import axios from 'axios';
 
 import RegistrationView from '../registration-view/registration-view';
@@ -64,7 +65,7 @@ export default class MainView extends React.Component {
 
   render() {
     const {movies, selectedMovie, user, registered } = this.state;
-console.log("LoginView");
+
     if ((!user) && (registered)) return <LoginView 
       onLoggedIn={user => this.onLoggedIn(user)}
       onRegistrationClicked={() => this.onRegistrationClicked()} />;

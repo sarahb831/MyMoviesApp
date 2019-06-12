@@ -9,14 +9,28 @@ import Col from 'react-bootstrap/Col';
 
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
+
 export default function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/
-    console.log(username, password);
     /* send request to server for authentication */
+    axios.post('http://localhost:3000/login', {
+      Username: username,
+      Password: password
+    })
+    .then(response => {
+      const data = response.data;
+      props.onLoggedIn(data);
+    })
+    .catch(e => {
+      console.log('user not in system')
+    });
+  };
+
     /* then call props.onLoggedIn(username) */
     props.onLoggedIn(username);
   };

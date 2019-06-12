@@ -38,10 +38,30 @@ export default class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
-    this.setState({
-      user
+  getMovies(token) {
+    axios.get('http://localhost:3000/movies', {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      // assign result to state
+      this.setState({
+        movies: response.data
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
     });
+  }
+
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
 
   onRegistrationClicked() {

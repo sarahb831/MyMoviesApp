@@ -1,0 +1,17 @@
+$primary-color: #8aebe7; /* sea foam blue */
+$secondary-color: #0086ad; /* darker blue */
+
+body {
+  color: black;
+  font-family: 'Poppins', sans-serif;
+}
+
+.main-view {
+    background-color: $primary-color;
+    color: black;
+}
+
+header {
+  font-weight: 700;
+  font-size: 50px;
+}

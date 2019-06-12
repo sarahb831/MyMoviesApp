@@ -20,35 +20,43 @@ export default class MovieView extends React.Component {
 
 
     return (
-        <div className = "movie-view">
-          <div className = "movie-title">
-            <div className = "label">Title</div>
-            <div className = "value">{movie.Title}</div>
-          </div>
-
-          <div className = "movie-description">
-            <div className = "label">Description</div>
-            <div className = "value">{movie.Description}</div>
-          </div>
-
-          <img className = "movie-poster" src={movie.ImagePath}/>
-
-          <div className = "movie-genre">
-            <div className = "label">Genre</div>
-            <div className = "value">{movie.Genre.Name}</div>
-          </div>
-
-          <div className = "movie-director">
-            <div className = "label">Director</div>
-            <div className = "value">{movie.Director.Name}</div>
-          </div>
-
-          <button
-            className = "return-button"
-            onClick = {() => onClick() }>
-            Return to Main Menu
-          </button>
-        </div>
+      <Card className = "movie-view" style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={movie.ImagePath} className = "movie-poster" />
+        <Card.Body>
+          <Card.Title className = "movie-title">{movie.Title}</Card.Title>
+          <Card.Text className = "movie-description">Description: {movie.Description}
+          </Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Text className = "movie-genre">{movie.Genre.Name}</Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Text className = "movie-director">{movie.Director.Name}</Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Button 
+            onClick={() => onClick()} 
+            variant="link"
+            className = "button-primary">
+            Return to Main Menu 
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes.string,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string
+    }).isRequired,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};
+

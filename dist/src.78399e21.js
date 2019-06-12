@@ -30170,7 +30170,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = MovieView;
-MovieCard.propTypes = {
+MovieView.propTypes = {
   movie: _propTypes.default.shape({
     Title: _propTypes.default.string,
     Description: _propTypes.default.string,
@@ -30500,7 +30500,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52530" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53962" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

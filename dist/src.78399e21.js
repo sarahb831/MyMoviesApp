@@ -27936,7 +27936,50 @@ Button.defaultProps = defaultProps;
 var _default = Button;
 exports.default = _default;
 module.exports = exports["default"];
-},{"@babel/runtime/helpers/interopRequireDefault":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/extends":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","classnames":"../../node_modules/classnames/index.js","react":"../../node_modules/react/index.js","./ThemeProvider":"../../node_modules/react-bootstrap/ThemeProvider.js","./SafeAnchor":"../../node_modules/react-bootstrap/SafeAnchor.js"}],"../../node_modules/dom-helpers/util/camelize.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/extends":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","classnames":"../../node_modules/classnames/index.js","react":"../../node_modules/react/index.js","./ThemeProvider":"../../node_modules/react-bootstrap/ThemeProvider.js","./SafeAnchor":"../../node_modules/react-bootstrap/SafeAnchor.js"}],"../../node_modules/react-bootstrap/Container.js":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var defaultProps = {
+  fluid: false
+};
+
+var Container = _react.default.forwardRef( // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      fluid = _ref.fluid,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'div' : _ref$as,
+      className = _ref.className,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "fluid", "as", "className"]);
+  var prefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'container');
+  return _react.default.createElement(Component, (0, _extends2.default)({
+    ref: ref
+  }, props, {
+    className: (0, _classnames.default)(className, fluid ? prefix + "-fluid" : prefix)
+  }));
+});
+
+Container.displayName = 'Container';
+Container.defaultProps = defaultProps;
+var _default = Container;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/extends":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","classnames":"../../node_modules/classnames/index.js","react":"../../node_modules/react/index.js","./ThemeProvider":"../../node_modules/react-bootstrap/ThemeProvider.js"}],"../../node_modules/dom-helpers/util/camelize.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -29600,6 +29643,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -29646,7 +29691,10 @@ function RegistrationView(props) {
     props.onRegistrationDone();
   };
 
-  return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+  return _react.default.createElement(_Container.default, null, _react.default.createElement(Row, null, _react.default.createElement(Col, null), _react.default.createElement(Col, {
+    xs: 12,
+    md: 8
+  }, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -29685,86 +29733,111 @@ function RegistrationView(props) {
   })), _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
+    className: "button-primary",
     onClick: handleRegistration
-  }, "Register"));
+  }, "Register"))), _react.default.createElement(Col, null)));
+}
+
+RegistrationView.propTypes = {
+  onRegistrationDone: _propTypes.default.func.isRequired
+};
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","prop-types":"../../node_modules/prop-types/index.js"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = LoginView;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function LoginView(props) {
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    /* to prevent default refresh of page from this method*/
+
+    console.log(username, password);
+    /* send request to server for authentication */
+
+    /* then call props.onLoggedIn(username) */
+
+    props.onLoggedIn(username);
+  };
+
+  var handleRegistry = function handleRegistry(e) {
+    e.preventDefault();
+    props.onRegistrationClicked();
+  };
+
+  return _react.default.createElement(_Container.default, null, _react.default.createElement(Row, null, _react.default.createElement(Col, null), _react.default.createElement(Col, {
+    xs: 12,
+    md: 8
+  }, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicUsername"
+  }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
+    type: "text",
+    value: username,
+    placeholder: "Username",
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
+    }
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
+    type: "password",
+    value: password,
+    placeholder: "Password",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    }
+  })), _react.default.createElement(_Button.default, {
+    variant: "primary",
+    type: "submit",
+    className: "button-primary",
+    onClick: handleSubmit
+  }, "Login"), _react.default.createElement(_Button.default, {
+    variant: "secondary",
+    type: "submit",
+    className: "button-secondary",
+    onClick: handleRegistry
+  }, "Not registered yet? Sign up here"))), _react.default.createElement(Col, null)));
 }
 
 LoginView.propTypes = {
-  onRegistrationDone: _propTypes.default.func.isRequired
+  onLoggedIn: _propTypes.default.func.isRequired,
+  onRegistrationClicked: _propTypes.default.func.isRequired
 };
-},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","prop-types":"../../node_modules/prop-types/index.js"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/react-bootstrap/utils/divWithClassName.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","prop-types":"../../node_modules/prop-types/index.js"}],"../../node_modules/react-bootstrap/utils/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -29992,7 +30065,8 @@ function (_React$Component) {
         onClick: function onClick() {
           return _onClick(movie);
         },
-        variant: "link"
+        variant: "link",
+        className: "button-primary"
       }, "Details")));
     }
   }]);
@@ -30016,6 +30090,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30059,41 +30139,30 @@ function (_React$Component) {
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
       if (!movie) return null;
-      return _react.default.createElement("div", {
-        className: "movie-view"
-      }, _react.default.createElement("div", {
+      return _react.default.createElement(_Card.default, {
+        className: "movie-view",
+        style: {
+          width: '18rem'
+        }
+      }, _react.default.createElement(_Card.default.Img, {
+        variant: "top",
+        src: movie.ImagePath,
+        className: "movie-poster"
+      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
         className: "movie-title"
-      }, _react.default.createElement("div", {
-        className: "label"
-      }, "Title"), _react.default.createElement("div", {
-        className: "value"
-      }, movie.Title)), _react.default.createElement("div", {
+      }, movie.Title), _react.default.createElement(_Card.default.Text, {
         className: "movie-description"
-      }, _react.default.createElement("div", {
-        className: "label"
-      }, "Description"), _react.default.createElement("div", {
-        className: "value"
-      }, movie.Description)), _react.default.createElement("img", {
-        className: "movie-poster",
-        src: movie.ImagePath
-      }), _react.default.createElement("div", {
+      }, "Description: ", movie.Description)), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, {
         className: "movie-genre"
-      }, _react.default.createElement("div", {
-        className: "label"
-      }, "Genre"), _react.default.createElement("div", {
-        className: "value"
-      }, movie.Genre.Name)), _react.default.createElement("div", {
+      }, movie.Genre.Name)), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, {
         className: "movie-director"
-      }, _react.default.createElement("div", {
-        className: "label"
-      }, "Director"), _react.default.createElement("div", {
-        className: "value"
-      }, movie.Director.Name)), _react.default.createElement("button", {
-        className: "return-button",
+      }, movie.Director.Name)), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Button.default, {
         onClick: function onClick() {
           return _onClick();
-        }
-      }, "Return to Main Menu"));
+        },
+        variant: "link",
+        className: "button-primary"
+      }, "Return to Main Menu")));
     }
   }]);
 
@@ -30101,7 +30170,20 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = MovieView;
-},{"react":"../../node_modules/react/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+MovieCard.propTypes = {
+  movie: _propTypes.default.shape({
+    Title: _propTypes.default.string,
+    Description: _propTypes.default.string,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string
+    }).isRequired,
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string
+    }).isRequired
+  }).isRequired,
+  onClick: _propTypes.default.func.isRequired
+};
+},{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/Card.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30115,7 +30197,7 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _registrationView = _interopRequireDefault(require("../registration-view/registration-view"));
 
-var _loginView = require("../login-view/login-view");
+var _loginView = _interopRequireDefault(require("../login-view/login-view"));
 
 var _movieCard = _interopRequireDefault(require("../movie-card/movie-card"));
 
@@ -30159,7 +30241,7 @@ function (_React$Component) {
       registered: true
     };
     return _this;
-  } // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git to Heroku resolved
+  } // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
 
 
   _createClass(MainView, [{
@@ -30190,8 +30272,15 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "onRegistered",
-    value: function onRegistered(registered, user) {
+    key: "onRegistrationClicked",
+    value: function onRegistrationClicked() {
+      this.setState({
+        registered: false
+      });
+    }
+  }, {
+    key: "onRegistrationDone",
+    value: function onRegistrationDone(user) {
       this.setState({
         registered: true,
         user: user
@@ -30212,12 +30301,19 @@ function (_React$Component) {
       var _this$state = this.state,
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
-          user = _this$state.user;
-      console.log(_loginView.LoginView); //   if ((!user) && (registered)) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
+          user = _this$state.user,
+          registered = _this$state.registered;
+      if (!user && registered) return _react.default.createElement(_loginView.default, {
+        onLoggedIn: function onLoggedIn(user) {
+          return _this3.onLoggedIn(user);
+        },
+        onRegistrationClicked: function onRegistrationClicked() {
+          return _this3.onRegistrationClicked();
+        }
+      });
       if (!registered) return _react.default.createElement(_registrationView.default, {
-        onRegistered: function onRegistered(registered, user) {
-          return _this3.onRegistered(registered, user);
+        onRegistrationDone: function onRegistrationDone(user) {
+          return _this3.onRegistrationDone(user);
         }
       }); // before movies have been loaded
 
@@ -30247,7 +30343,74 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = MainView;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../login-view/login-view":"components/login-view/login-view.scss","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"index.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -30259,7 +30422,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
-var _mainView = require("./components/main-view/main-view");
+var _mainView = _interopRequireDefault(require("./components/main-view/main-view"));
 
 require("./index.scss");
 
@@ -30298,7 +30461,7 @@ function (_React$Component) {
   _createClass(myMoviesApplication, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement(_mainView.MainView, null);
+      return _react.default.createElement(_mainView.default, null);
     }
   }]);
 
@@ -30337,7 +30500,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49813" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52530" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

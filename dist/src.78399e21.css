@@ -1,5 +1,17 @@
+/* sea foam blue */
+/* darker blue */
+body {
+  color: black;
+  font-family: "Poppins", sans-serif;
+}
+
 .my-movies {
   color: steelblue;
+}
+
+header {
+  font-weight: 700;
+  font-size: 50px;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

@@ -51,7 +51,7 @@ export default function LoginView(props) {
             <Button
               variant="primary"
               type="submit"
-              className = "primary"
+              className = "button-primary"
               onClick = {handleSubmit}>
               Login
             </Button>
@@ -59,7 +59,7 @@ export default function LoginView(props) {
             <Button
               variant="secondary"
               type="submit"
-              className = "secondary"
+              className = "button-secondary"
               onClick = {handleRegistry}>
               Not registered yet? Sign up here
             </Button>

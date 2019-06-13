@@ -15,7 +15,7 @@ export default class MainView extends React.Component {
 
     this.state = {
       movies: null,
-      selectedMovie: null,
+      selectedMovieId: null,
       user: null,
       registered: true
     };
@@ -33,7 +33,7 @@ export default class MainView extends React.Component {
 
   onMovieClick(movie) {
     this.setState({
-      selectedMovie: movie
+      selectedMovieId: movie._id
     });
   }
 
@@ -88,7 +88,7 @@ export default class MainView extends React.Component {
   }
 
   render() {
-    const {movies, selectedMovie, user, registered } = this.state;
+    const {movies, selectedMovieId, user, registered } = this.state;
 
     if ((!user) && (registered)) return <LoginView 
       onLoggedIn={user => this.onLoggedIn(user)}
@@ -97,17 +97,20 @@ export default class MainView extends React.Component {
    if (!registered) return <RegistrationView onRegistrationDone={user => this.onRegistrationDone(user)} />;
 
     // before movies have been loaded
-    if (!movies) return (
+    if (!movies || !movies.length) return (
       <div className = "main-view">
         <Button
           variant="primary"
          type="submit"
          className = "button-primary"
-          onClick = {handleLogout}>
+          onClick = {() => this.handleLogout}>
           Logout
         </Button>
       </div>
     )
+
+    const selectedMovie = selectedMovieId ? movies.find(m=> m._id === selectedMovieId) : null;
+
     return (
       <div className = "main-view">
       {/* if there is a selectedMovie, assign it to the MovieView movie,
@@ -127,7 +130,7 @@ export default class MainView extends React.Component {
           variant="primary"
           type="submit"
           className = "button-primary"
-         onClick = {handleLogout}>
+         onClick = {() => this.handleLogout}>
           Logout
         </Button>
       </div>

@@ -21,15 +21,13 @@ export default class MainView extends React.Component {
   }
 // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {
-    axios.get('http://localhost:3000/movies')
-    .then(response => {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
       this.setState({
-        movies: response.data
+        user: localStorage.getItem('user')
       });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      this.getMovies(accessToken);
+    }
   }
 
   onMovieClick(movie) {

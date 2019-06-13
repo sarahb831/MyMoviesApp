@@ -33,6 +33,7 @@ export default function RegistrationView(props) {
                 type="text"
                 value={username}
                 placeholder="Username"
+                required 
                 onChange = {e => setUsername(e.target.value)} />
               </Form.Group>
 
@@ -42,6 +43,7 @@ export default function RegistrationView(props) {
                   type="password"
                   value={password}
                   placeholder="Password"
+                  required 
                   onChange = {e => setPassword(e.target.value)}/>
               </Form.Group>
 
@@ -51,6 +53,7 @@ export default function RegistrationView(props) {
                   type="email"
                   value={email}
                   placeholder="Email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
                   onChange = {e => setEmail(e.target.value)}/>
               </Form.Group>
 

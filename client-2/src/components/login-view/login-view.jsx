@@ -17,7 +17,6 @@ export default function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    
     /* send request to server for authentication */
     axios.post('http://localhost:3000/login', {
       Username: username,
@@ -27,7 +26,7 @@ export default function LoginView(props) {
       const data = response.data;
       props.onLoggedIn(data);
     })
-    .catch(3 => {
+    .catch(e => {
       console.log('user not in system')
     });
   };
@@ -50,7 +49,8 @@ export default function LoginView(props) {
                 type="text"
                 value={username}
                 placeholder="Username"
-                onChange = {e => setUsername(e.target.value)} />
+                onChange = {e => setUsername(e.target.value)} 
+                required />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -59,7 +59,8 @@ export default function LoginView(props) {
               type="password"
               value={password}
               placeholder="Password"
-              onChange = {e => setPassword(e.target.value)}/>
+              onChange = {e => setPassword(e.target.value)}
+              required />
             </Form.Group>
 
             <Button

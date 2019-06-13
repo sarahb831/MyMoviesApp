@@ -45,6 +45,8 @@ export default class MainView extends React.Component {
   }
 
   onMovieClick(movie) {
+    window.location.hash = '#' + movie._id;
+    
     this.setState({
       selectedMovieId: movie._id
     });

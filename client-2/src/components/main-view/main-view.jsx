@@ -6,6 +6,7 @@ import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
+import Button from 'react-bootstrap/Button';
 
 export default class MainView extends React.Component {
 
@@ -81,6 +82,11 @@ export default class MainView extends React.Component {
     });
   }
 
+  handleLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
   render() {
     const {movies, selectedMovie, user, registered } = this.state;
 
@@ -91,8 +97,17 @@ export default class MainView extends React.Component {
    if (!registered) return <RegistrationView onRegistrationDone={user => this.onRegistrationDone(user)} />;
 
     // before movies have been loaded
-    if (!movies) return <div className = "main-view"/>;
-
+    if (!movies) return (
+      <div className = "main-view">
+        <Button
+          variant="primary"
+         type="submit"
+         className = "button-primary"
+          onClick = {handleLogout}>
+          Logout
+        </Button>
+      </div>
+    )
     return (
       <div className = "main-view">
       {/* if there is a selectedMovie, assign it to the MovieView movie,
@@ -108,7 +123,15 @@ export default class MainView extends React.Component {
             onClick={movie => this.onMovieClick(movie)}/>
         ))
       }
+        <Button
+          variant="primary"
+          type="submit"
+          className = "button-primary"
+         onClick = {handleLogout}>
+          Logout
+        </Button>
       </div>
+     
     );
   }
 }

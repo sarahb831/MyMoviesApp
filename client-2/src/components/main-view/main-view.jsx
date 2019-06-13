@@ -2,6 +2,8 @@ import React from 'react';
 
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
@@ -15,17 +17,12 @@ export default class MainView extends React.Component {
 
     this.state = {
       movies: null,
-      selectedMovieId: null,
       user: null,
       registered: true
     };
   }
 // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
-  componentDidMount() {
-    window.addEventListener('hashchange', this.handleNewHash, false);
-
-    this.handleNewHash();
-    
+  componentDidMount() {    
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -33,23 +30,6 @@ export default class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
-
-  }
-
-  handleNewHash = () => {
-    const movieId = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
-
-    this.setState({
-      selectedMovieId: movieId[0]
-    });
-  }
-
-  onMovieClick(movie) {
-    window.location.hash = '#' + movie._id;
-    
-    this.setState({
-      selectedMovieId: movie._id
-    });
   }
 
   getMovies(token) {
@@ -103,7 +83,7 @@ export default class MainView extends React.Component {
   }
 
   render() {
-    const {movies, selectedMovieId, user, registered } = this.state;
+    const {movies, user, registered } = this.state;
 
     if ((!user) && (registered)) return <LoginView 
       onLoggedIn={user => this.onLoggedIn(user)}
@@ -111,8 +91,7 @@ export default class MainView extends React.Component {
 
    if (!registered) return <RegistrationView onRegistrationDone={user => this.onRegistrationDone(user)} />;
 
-    // before movies have been loaded
-    if (!movies || !movies.length) return (
+   if (!movies) return (
       <div className = "main-view">
         <Button
           variant="primary"
@@ -124,32 +103,25 @@ export default class MainView extends React.Component {
       </div>
     )
 
-    const selectedMovie = selectedMovieId ? movies.find(m=> m._id === selectedMovieId) : null;
-
     return (
-      <div className = "main-view">
-      {/* if there is a selectedMovie, assign it to the MovieView movie,
-       else onClick assign the selectedMovie to movie */}
-      {selectedMovie
-        ? <MovieView
-            movie={selectedMovie}
-            onClick = {button => this.onMainViewClick()}/>
-        : movies.map(movie => (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onClick={movie => this.onMovieClick(movie)}/>
-        ))
-      }
-        <Button
-          variant="primary"
-          type="submit"
-          className = "button-primary"
-         onClick = {() => this.handleLogout}>
-          Logout
-        </Button>
-      </div>
-     
+      <Router>
+        <div className = "main-view">
+          <Route exact path="/" 
+            render={() => movies.map(m => 
+              <MovieCard key={m._id} movie={m}/>)}/>
+          <Route path="/movies/:movieId" 
+            render={({match}) => 
+              <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
+      
+          <Button
+           variant="primary"
+           type="submit"
+           className = "button-primary"
+           onClick = {() => this.handleLogout}>
+           Logout
+          </Button>
+        </div>
+     </Router>
     );
   }
 }

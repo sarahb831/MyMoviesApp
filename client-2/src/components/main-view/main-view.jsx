@@ -22,6 +22,10 @@ export default class MainView extends React.Component {
   }
 // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {
+    window.addEventListener('hashchange', this.handleNewHash, false);
+
+    this.handleNewHash();
+    
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -29,6 +33,15 @@ export default class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
+
+  }
+
+  handleNewHash = () => {
+    const movieId = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+
+    this.setState({
+      selectedMovieId: movieId[0]
+    });
   }
 
   onMovieClick(movie) {

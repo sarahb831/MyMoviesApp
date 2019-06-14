@@ -30,12 +30,11 @@ export default class DirectorView extends React.Component {
         </Card.Body>
         
         <Card.Body>
-          <Button 
-            onClick={() => onClick()} 
-            variant="link"
-            className = "button-primary">
-            Return to Main Menu 
-          </Button>
+        <Link to={`/`}>
+            <Button variant="link" className = "button-primary">
+              Return to Main Menu 
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     );

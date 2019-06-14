@@ -17,11 +17,11 @@ export default class MainView extends React.Component {
 
     this.state = {
       movies: [],
-      user: null,
-      registered: true
+      user: null
     };
   }
-// change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
+
+  // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {    
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
@@ -33,7 +33,8 @@ export default class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('http://localhost:3000/movies', {
+    const apiUrlMovies = 'http://localhost:3000/movies';
+    axios.get(apiUrlMovies, {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
@@ -58,19 +59,6 @@ export default class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  onRegistrationClicked() {
-    this.setState({
-      registered: false
-    });
-  }
-  
-  onRegistrationDone(user) {
-    this.setState({
-      registered: true,
-      user
-    });
-  }
-
   onMainViewClick() {
     this.setState({
       selectedMovie: null
@@ -85,9 +73,7 @@ export default class MainView extends React.Component {
   render() {
     const {movies, user, registered } = this.state;
 
-    if (!registered) return <RegistrationView onRegistrationDone={user => this.onRegistrationDone(user)} />;
-
-   if (!movies) return (
+    if (!movies) return (
       <div className = "main-view">
         <Button
           variant="primary"

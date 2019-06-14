@@ -31,6 +31,5 @@ export default class MovieCard extends React.Component {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+  }).isRequired
 };

@@ -24,8 +24,8 @@ export default function RegistrationView(props) {
     Axios.post(apiUrlUsers, {
       Username: username, 
       Password: password,
-     Email: email,
-     Birthday: birthday
+      Email: email,
+      Birthday: birthday
     })
     .then(response => {
       const data = response.data;
@@ -35,7 +35,6 @@ export default function RegistrationView(props) {
     .catch(e => {
       console.log('error registering user')
     });
-    //props.onRegistrationDone();
   };
 
     return (
@@ -97,6 +96,3 @@ export default function RegistrationView(props) {
     );
   }
 
-  RegistrationView.propTypes = {
-    onRegistrationDone: PropTypes.func.isRequired
-  };

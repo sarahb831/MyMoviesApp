@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import PropTypes from 'prop-types';
+import Axios from 'axios';
 
 export default function RegistrationView(props) {
   const [ username, setUsername ] = useState('');
@@ -15,10 +16,26 @@ export default function RegistrationView(props) {
   const [email, setEmail ] = useState('');
   const [ birthday, setBirthday ] = useState('');
 
+  const apiUrlUsers = 'http://localhost:3000/users';
+
   const handleRegistration = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/
-/* send request to server for registration */
-    props.onRegistrationDone();
+    /* send request to server for registration */
+    Axios.post(apiUrlUsers, {
+      Username: username, 
+      Password: password,
+     Email: email,
+     Birthday: birthday
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/');
+    })
+    .catch(e => {
+      console.log('error registering user')
+    });
+    //props.onRegistrationDone();
   };
 
     return (

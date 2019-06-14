@@ -8,6 +8,9 @@ import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
+import DirectorView from '../director-view/director-view';
+import GenreView from '../genre-view/genre-view';
+import ProfileView from '../profile-view/profile-view';
 import Button from 'react-bootstrap/Button';
 
 export default class MainView extends React.Component {

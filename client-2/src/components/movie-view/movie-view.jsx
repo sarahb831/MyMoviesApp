@@ -46,12 +46,11 @@ export default class MovieView extends React.Component {
               Genre
             </Button>
           </Link>
-          <Button 
-            onClick={() => onClick()} 
-            variant="link"
-            className = "button-primary">
-            Return to Main Menu 
-          </Button>
+          <Link to={`/`}>
+            <Button variant="link" className = "button-primary">
+              Return to Main Menu 
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     );

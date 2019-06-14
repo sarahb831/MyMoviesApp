@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import { Link } from  'react-router-dom';
+
 export default class MovieView extends React.Component {
 
   constructor() {
@@ -34,6 +36,16 @@ export default class MovieView extends React.Component {
           <Card.Text className = "movie-director">{movie.Director.Name}</Card.Text>
         </Card.Body>
         <Card.Body>
+          <Link to={`/directors/${movie.Director.Name}`}>
+            <Button variant="link" className="button-primary">
+              Director
+            </Button>
+          </Link>
+          <Link to={`genres/${movie.Genre.Name}`}>
+            <Button variant="link" className="button-primary">
+              Genre
+            </Button>
+          </Link>
           <Button 
             onClick={() => onClick()} 
             variant="link"

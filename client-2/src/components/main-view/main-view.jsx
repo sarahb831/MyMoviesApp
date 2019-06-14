@@ -113,7 +113,10 @@ export default class MainView extends React.Component {
               return <DirectorView director={movies.find(m =>
                 m.Director.Name === match.params.name).Director}/>}
             } />
-      
+            <Route exact path="/users/:Username"
+              render={({match}) =>
+            <ProfileView profile={user}/>}
+            />
           <Button
            variant="primary"
            type="submit"

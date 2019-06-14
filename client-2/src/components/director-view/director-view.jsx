@@ -42,17 +42,12 @@ export default class DirectorView extends React.Component {
   }
 }
 
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string,
-    Description: PropTypes.string,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string
-    }).isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string
-    }).isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string,
+    Bio: PropTypes.string,
+    Birth: PropTypes.string,
+    Death: PropTypes.string
+  }).isRequired
 };
 

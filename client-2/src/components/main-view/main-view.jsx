@@ -75,12 +75,13 @@ export default class MainView extends React.Component {
 
   render() {
     const {movies, user} = this.state;
+
     if (!movies) return (
       <div className = "main-view">
         <Button
           variant="primary"
-         type="submit"
-         className = "button-primary"
+          type="submit"
+          className = "button-primary"
           onClick = {() => this.handleLogout}>
           Logout
         </Button>

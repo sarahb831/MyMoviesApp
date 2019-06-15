@@ -30,29 +30,23 @@ export default class DirectorView extends React.Component {
         </Card.Body>
         
         <Card.Body>
-          <Button 
-            onClick={() => onClick()} 
-            variant="link"
-            className = "button-primary">
-            Return to Main Menu 
-          </Button>
+        <Link to={`/`}>
+            <Button variant="link" className = "button-primary">
+              Return to Main Menu 
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     );
   }
 }
 
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string,
-    Description: PropTypes.string,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string
-    }).isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string
-    }).isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string,
+    Bio: PropTypes.string,
+    Birth: PropTypes.string,
+    Death: PropTypes.string
+  }).isRequired
 };
 

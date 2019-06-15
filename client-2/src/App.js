@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { MainView } from './components/main-view/main-view';
+import MainView from './components/main-view/main-view';
 
 import './App.css';
 

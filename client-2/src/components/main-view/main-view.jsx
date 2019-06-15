@@ -36,8 +36,7 @@ export default class MainView extends React.Component {
   }
 
   getMovies(token) {
-    const apiUrlMovies = 'http://localhost:3000/movies';
-    axios.get(apiUrlMovies, {
+    axios.get('http://localhost:3000/movies', {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
@@ -71,11 +70,11 @@ export default class MainView extends React.Component {
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    console.log("localStorage cleared");
   }
 
   render() {
     const {movies, user} = this.state;
-
     if (!movies) return (
       <div className = "main-view">
         <Button

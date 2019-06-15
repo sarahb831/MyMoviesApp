@@ -33,12 +33,6 @@ export default function LoginView(props) {
     });
   };
 
-  const handleRegistry =(e) => {
-    e.preventDefault();
-    props.onRegistrationClicked();
-  };
-
-
   return (
     <Container>
       <Row>

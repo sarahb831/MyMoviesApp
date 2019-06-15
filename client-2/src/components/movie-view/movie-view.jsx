@@ -16,7 +16,7 @@ export default class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     if (!movie) return null;
 
@@ -67,7 +67,6 @@ MovieView.propTypes = {
     Director: PropTypes.shape({
       Name: PropTypes.string
     }).isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+  }).isRequired
 };
 

@@ -76,7 +76,7 @@ export default class MainView extends React.Component {
   render() {
     const {movies, user} = this.state;
 
-    /*if (!movies) return (
+    if (!movies) return (
       <div className = "main-view">
         <Button
           variant="primary"
@@ -87,7 +87,7 @@ export default class MainView extends React.Component {
         </Button>
       </div>
     )
-*/
+
     return (
       <Router>
         <div className = "main-view">

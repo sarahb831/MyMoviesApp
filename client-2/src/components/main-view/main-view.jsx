@@ -12,6 +12,7 @@ import DirectorView from '../director-view/director-view';
 import GenreView from '../genre-view/genre-view';
 import ProfileView from '../profile-view/profile-view';
 import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
 
 export default class MainView extends React.Component {
 
@@ -117,13 +118,23 @@ export default class MainView extends React.Component {
               render={({match}) =>
             <ProfileView profile={user}/>}
             />
-          <Button
-           variant="primary"
-           type="submit"
-           className = "button-primary"
-           onClick = {() => this.handleLogout}>
-           Logout
-          </Button>
+
+            <Navbar bg="info" variant="light">
+              <Navbar.Brand href="#home">myMovies</Navbar.Brand>
+              <Navbar.Text>
+                Signed in as: {user}
+              </Navbar.Text>
+              <Navbar.Collapse className="justify-content-end">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className = "button-logout"
+                  size="sm"
+                  onClick = {this.handleLogout}>
+                  Logout
+                </Button>
+              </Navbar.Collapse>
+            </Navbar>
         </div>
      </Router>
     );

@@ -73,7 +73,7 @@ export default function RegistrationView(props) {
               </Form.Group>
 
               <Form.Group controlId="formBasicBirthday">
-                <Form.Label>Birthday (YYYY-MM-DD)</Form.Label>
+                <Form.Label>Birthday</Form.Label>
                 <Form.Control
                 type="date"
                 value={birthday}

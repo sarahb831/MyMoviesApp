@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import axios from 'axios';
 
 import { Link } from  'react-router-dom';
 
 export default function ProfileView(props) {
-  const [ username, setUsername ] = useState(props.profile.Username);
-  const [ password, setPassword ] = useState(props.profile.Password);
-  const [ email, setEmail ] = useState(props.profile.Email);
-  const [ birthdate, setBirthdate ] = useState(props.profile.Birthdate);
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ birthdate, setBirthdate ] = useState('');
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
@@ -61,7 +64,11 @@ export default function ProfileView(props) {
 
     return (
     <div>
-      <Form>
+      <Container>
+        <Row>
+          <Col></Col>
+          <Col  xs={12} md={8}>
+            <Form>
         <Form.Group controlId="formGroupUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder={username} 
@@ -111,7 +118,7 @@ export default function ProfileView(props) {
 
       <Card style={{ width: '16rem' }}>
 
-        {props.profile.FavoriteMovies.map(m => (
+        { props.profile.FavoriteMovies.map(m => (
           <Card.Body>
             <Card.Title>{m.Title}</Card.Title>
             <Card.Text>{m.Description}</Card.Text>
@@ -122,8 +129,12 @@ export default function ProfileView(props) {
               Delete From Favorites
             </Button>
           </Card.Body>
-      ))}
+        ))}
       </Card>
+      </Col>
+          <Col></Col>
+        </Row>
+      </Container>
     </div>
     );   
 }

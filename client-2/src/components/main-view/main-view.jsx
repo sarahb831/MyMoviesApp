@@ -90,6 +90,25 @@ export default class MainView extends React.Component {
     )
 */
     return (
+      <div>
+      <div>
+      <Navbar bg="info" variant="light">
+              <Navbar.Brand href="#home">myMovies</Navbar.Brand>
+              <Navbar.Text>
+                Signed in as: {user}
+              </Navbar.Text>
+              <Navbar.Collapse className="justify-content-end">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className = "button-logout"
+                  size="sm"
+                  onClick = {this.handleLogout}>
+                  Logout
+                </Button>
+              </Navbar.Collapse>
+            </Navbar>
+      </div>
       <Router>
         <div className = "main-view">
           <Route exact path="/" 
@@ -98,6 +117,7 @@ export default class MainView extends React.Component {
               return movies.map(m => <MovieCard key={m._id} movie={m}/>)
             }
           }/>
+  
           <Route path="/register" render={() => <RegistrationView />} />
           <Route path="/movies/:movieId" 
             render={({match}) => 
@@ -119,24 +139,10 @@ export default class MainView extends React.Component {
             <ProfileView profile={user}/>}
             />
 
-            <Navbar bg="info" variant="light">
-              <Navbar.Brand href="#home">myMovies</Navbar.Brand>
-              <Navbar.Text>
-                Signed in as: {user}
-              </Navbar.Text>
-              <Navbar.Collapse className="justify-content-end">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className = "button-logout"
-                  size="sm"
-                  onClick = {this.handleLogout}>
-                  Logout
-                </Button>
-              </Navbar.Collapse>
-            </Navbar>
+            
         </div>
      </Router>
+     </div>
     );
   }
 }

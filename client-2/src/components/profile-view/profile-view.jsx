@@ -12,6 +12,7 @@ export default function ProfileView(props) {
   const [ username, setUsername ] = useState(props.profile.Username);
   const [ password, setPassword ] = useState(props.profile.Password);
   const [ email, setEmail ] = useState(props.profile.Email);
+  const [ birthdate, setBirthdate ] = useState(props.profile.Birthdate);
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 

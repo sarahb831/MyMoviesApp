@@ -1,48 +1,134 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+
+import axios from 'axios';
 
 import { Link } from  'react-router-dom';
 
-export default class ProfileView extends React.Component {
+export default function ProfileView(props) {
+  const [ username, setUsername ] = useState(props.profile.Username);
+  const [ password, setPassword ] = useState(props.profile.Password);
+  const [ email, setEmail ] = useState(props.profile.Email);
 
-  constructor() {
-    super();
+  const handleProfileUpdate = (e) => {
+    e.preventDefault(); 
+    /* send request to server for update*/
+      axios.put('http://localhost:3000/users/:Username', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthdate: birthdate
+      })
+      .then(response => {
+        const data = response.data;
+        console.log("profile updated");
+        console.log(data);
+     })
+     .catch(e => {
+       console.log('user not in system')
+     });
+  };
 
-    this.state = {};
+  const handleProfileDelete = (e) => {
+    e.preventDefault(); 
+    /* send request to server for update*/
+      axios.delete('http://localhost:3000/users/:Username')
+      .then(response => {
+        const data = response.data;
+        console.log("profile deleted");
+        console.log(data);
+     })
+     .catch(e => {
+       console.log('user not in system')
+     });
+  };
+
+  function handleMovieDelete(movieId) {
+    axios.delete('http://localhost:3000/users/:Username/:MovieID')
+    .then(response => {
+      const data = response.data;
+      console.log("movie deleted from favorites");
+      console.log(data);
+    })
+    .catch(e => {
+      console.log('movie not found')
+    });
   }
 
-  render() {
-    const { user } = this.props;
-
     return (
-      <Card className = "profile-view" style={{ width: '18rem' }}>
+    <div>
+      <Form>
+        <Form.Group controlId="formGroupUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" placeholder={username} 
+            onChange = {e => setUsername(e.target.value)} 
+            aria-label="Username"/>
+        </Form.Group>
+        <Form.Group controlId="formGroupPassword">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" 
+            onChange = {e => setPassword(e.target.value)} 
+            aria-label="Password"/>
+        </Form.Group>
+        <Form.Group controlId="formGroupEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder={email} 
+            onChange = {e => setEmail(e.target.value)}  
+            aria-label="Email"/>
+        </Form.Group>
+        <Form.Group controlId="formGroupBirthdate">
+          <Form.Label>Birthdate</Form.Label>
+          <Form.Control type="date" placeholder={birthdate} 
+            onChange = {e => setBirthdate(e.target.value)} 
+            aria-label="Birthdate"/>
+        </Form.Group>
+      </Form>
+      <Card> 
         <Card.Body>
-          <Card.Title className = "profile-username">Username: {user.Username}
-          </Card.Title>
-          <Card.Text className = "profile-password">Password: {user.Password}
-          </Card.Text>
-          <Card.Text className = "profile-email">Email: {user.Email}
-          </Card.Text>
-          <Card.Text className = "profile-birthday">Birthday: {user.Birthday}
-          </Card.Text>
-        </Card.Body>
-        
-        <Card.Body>
-        <Link to={`/`}>
+          <Button
+            variant="primary"
+            type="submit"
+            className = "button-primary"
+            onClick = {handleProfileUpdate}>Update Profile
+          </Button>
+          <Button
+            variant="primary"
+            type="submit"
+            className = "button-primary"
+            onClick = {handleProfileDelete}>Delete Profile
+          </Button>
+          <Link to={`/`}>
             <Button variant="link" className = "button-primary">
               Return to Main Menu 
             </Button>
           </Link>
         </Card.Body>
       </Card>
-    );
-  }
+
+      <Card style={{ width: '16rem' }}>
+
+        {props.profile.FavoriteMovies.map(m => (
+          <Card.Body>
+            <Card.Title>{m.Title}</Card.Title>
+            <Card.Text>{m.Description}</Card.Text>
+            <Button 
+              variant="link" 
+              onClick = {handleMovieDelete(m._id)}
+              className = "button-primary">
+              Delete From Favorites
+            </Button>
+          </Card.Body>
+      ))}
+      </Card>
+    </div>
+    );   
 }
 
 ProfileView.propTypes = {
-  user: PropTypes.shape({
+  profile: PropTypes.shape({
     Username: PropTypes.string,
     Password: PropTypes.string,
     Email: PropTypes.string

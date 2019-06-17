@@ -77,18 +77,27 @@ export default class MainView extends React.Component {
   render() {
     const {movies, user} = this.state;
 
-    /*if (!movies) return (
+    if (!movies) return (
       <div className = "main-view">
-        <Button
-          variant="primary"
-          type="submit"
-          className = "button-primary"
-          onClick = {() => this.handleLogout}>
-          Logout
-        </Button>
+        <Navbar bg="info" variant="light">
+              <Navbar.Brand href="#home">myMovies</Navbar.Brand>
+              <Navbar.Text>
+                Signed in as: {user}
+              </Navbar.Text>
+              <Navbar.Collapse className="justify-content-end">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className = "button-logout"
+                  size="sm"
+                  onClick = {this.handleLogout}>
+                  Logout
+                </Button>
+              </Navbar.Collapse>
+            </Navbar>
       </div>
     )
-*/
+
     return (
       <div>
       <div>

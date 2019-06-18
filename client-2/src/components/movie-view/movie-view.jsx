@@ -1,27 +1,21 @@
 // client\src\components\movie-view\movie-view.jsx
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import { Link } from  'react-router-dom';
 
-export default class MovieView extends React.Component {
+function MovieView(props) {
+  const { movies, movieId } = props;
 
-  constructor() {
-    super();
+  if (!movies || !movies.length) return null;
 
-    this.state = {};
-  }
+  const movie = movies.find(m => m._id == movieId); // note not strict equality here
 
-  render() {
-    const { movie } = this.props;
-
-    if (!movie) return null;
-
-
-    return (
+  return (
       <Card className = "movie-view" style={{ width: '18rem' }}>
         <Card.Img variant="top" src={movie.ImagePath} className = "movie-poster" />
         <Card.Body>
@@ -29,12 +23,7 @@ export default class MovieView extends React.Component {
           <Card.Text className = "movie-description">Description: {movie.Description}
           </Card.Text>
         </Card.Body>
-        <Card.Body>
-          <Card.Text className = "movie-genre">{movie.Genre.Name}</Card.Text>
-        </Card.Body>
-        <Card.Body>
-          <Card.Text className = "movie-director">{movie.Director.Name}</Card.Text>
-        </Card.Body>
+        
         <Card.Body>
           <Link to={`/directors/${movie.Director.Name}`}>
             <Button variant="link" className="button-primary">
@@ -54,9 +43,9 @@ export default class MovieView extends React.Component {
         </Card.Body>
       </Card>
     );
-  }
 }
 
+/*
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string,
@@ -69,4 +58,7 @@ MovieView.propTypes = {
     }).isRequired,
   }).isRequired
 };
+*/
+
+export default connect(({movies}) => ({movies}))(MovieView);
 

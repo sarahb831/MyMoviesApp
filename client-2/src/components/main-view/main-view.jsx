@@ -142,14 +142,12 @@ class MainView extends React.Component {
           <Route  exact path="/genres/:name"
             render={({ match }) => {
             //  if (!movies || !movies.length) return <div className="main-view"/>;
-              return <GenreView genre={movies.find(m => 
-                m.Genre.Name === match.params.name).Genre}/>}
+              return <GenreView genre={match.params.name}/>}
             } />
             <Route exact path="/directors/:name"
             render={({match}) => {
              // if (!movies || !movies.length) return <div className="main-view"/>;
-              return <DirectorView director={movies.find(m =>
-                m.Director.Name === match.params.name).Director}/>}
+              return <DirectorView director={match.params.name}/>}
             } />
             <Route exact path="/users/:Username"
               render={({match}) =>

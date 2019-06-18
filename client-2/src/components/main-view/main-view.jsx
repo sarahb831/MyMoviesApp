@@ -13,7 +13,7 @@ import MoviesList from '../movies-list/movies-list';
 
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
-import MovieCard from '../movie-card/movie-card';
+// import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
 import DirectorView from '../director-view/director-view';
 import GenreView from '../genre-view/genre-view';
@@ -21,7 +21,7 @@ import ProfileView from '../profile-view/profile-view';
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 
-export default class MainView extends React.Component {
+class MainView extends React.Component {
 
   constructor() {
     super();
@@ -159,3 +159,5 @@ export default class MainView extends React.Component {
     );
   }
 }
+
+export default connect(null, { setMovies } )(MainView);

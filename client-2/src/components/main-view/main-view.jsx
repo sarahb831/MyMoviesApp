@@ -2,7 +2,14 @@ import React from 'react';
 
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { setMovies } from  '../actions/actions'; // to import relevant actions
+
+import MoviesList from '../movies-list/movies-list';
+
 
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
@@ -20,7 +27,6 @@ export default class MainView extends React.Component {
     super();
 
     this.state = {
-      movies: [],
       user: null
     };
   }
@@ -41,10 +47,8 @@ export default class MainView extends React.Component {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      // assign result to state
-      this.setState({
-        movies: response.data
-      });
+      // movies moved here now
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -52,7 +56,7 @@ export default class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log(authData.user.Username);
     this.setState({
       user: authData.user.Username
     });
@@ -62,6 +66,7 @@ export default class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  // remove?
   onMainViewClick() {
     this.setState({
       selectedMovie: null
@@ -75,9 +80,8 @@ export default class MainView extends React.Component {
   }
 
   render() {
-    const {movies, user} = this.state;
 
-    if (!movies) return (
+    if (!user) return (
       <div className = "main-view">
         <Navbar bg="info" variant="light">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
@@ -95,13 +99,14 @@ export default class MainView extends React.Component {
                 </Button>
               </Navbar.Collapse>
             </Navbar>
+            <LoginView onLoggedIn={this.onLoggedIn}/>
       </div>
     )
 
     return (
       <div>
-      <div>
-      <Navbar bg="info" variant="light">
+        <div>
+          <Navbar bg="info" variant="light">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
               <Navbar.Text>
                 Signed in as: {user}
@@ -123,23 +128,22 @@ export default class MainView extends React.Component {
           <Route exact path="/" 
             render={() => {
               if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-              return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+              return <MoviesList/>;
             }
           }/>
   
           <Route path="/register" render={() => <RegistrationView />} />
           <Route path="/movies/:movieId" 
-            render={({match}) => 
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
+            render={({match}) => <MovieView movieId={match.params.id}/>}/>
           <Route  exact path="/genres/:name"
             render={({ match }) => {
-              if (!movies || !movies.length) return <div className="main-view"/>;
+            //  if (!movies || !movies.length) return <div className="main-view"/>;
               return <GenreView genre={movies.find(m => 
                 m.Genre.Name === match.params.name).Genre}/>}
             } />
             <Route exact path="/directors/:name"
             render={({match}) => {
-              if (!movies || !movies.length) return <div className="main-view"/>;
+             // if (!movies || !movies.length) return <div className="main-view"/>;
               return <DirectorView director={movies.find(m =>
                 m.Director.Name === match.params.name).Director}/>}
             } />

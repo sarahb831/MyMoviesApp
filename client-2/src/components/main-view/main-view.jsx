@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { setMovies } from  '../actions/actions'; // to import relevant actions
+import { setMovies } from  '../../actions/actions'; // to import relevant actions
 
 import MoviesList from '../movies-list/movies-list';
 

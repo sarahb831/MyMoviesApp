@@ -23,6 +23,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 class MainView extends React.Component {
 
+  /*
   constructor() {
     super();
 
@@ -30,6 +31,7 @@ class MainView extends React.Component {
       user: null
     };
   }
+  */
 
   // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {    
@@ -81,8 +83,10 @@ class MainView extends React.Component {
 
   render() {
 
+    const { user } = this.state;
+
     if (!user) return (
-      <div className = "main-view">
+      <div>
         <Navbar bg="info" variant="light">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
               <Navbar.Text>
@@ -133,7 +137,7 @@ class MainView extends React.Component {
           }/>
   
           <Route path="/register" render={() => <RegistrationView />} />
-          <Route path="/movies/:movieId" 
+          <Route path="/movies/:id" 
             render={({match}) => <MovieView movieId={match.params.id}/>}/>
           <Route  exact path="/genres/:name"
             render={({ match }) => {

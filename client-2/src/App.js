@@ -8,7 +8,7 @@ import MainView from './components/main-view/main-view';
 
 import './App.css';
 
-const store = createStore(movieApp);
+const store = createStore(moviesApp);
 
 class App extends Component {
   render() {

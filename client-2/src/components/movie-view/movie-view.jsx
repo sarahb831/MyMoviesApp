@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -13,6 +13,7 @@ function MovieView(props) {
 
   if (!movies || !movies.length) return null;
 
+  // eslint-disable-next-line
   const movie = movies.find(m => m._id == movieId); // note not strict equality here
 
   return (

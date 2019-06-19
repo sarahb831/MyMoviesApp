@@ -23,7 +23,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 class MainView extends React.Component {
 
-  /*
+  /* keep? */
   constructor() {
     super();
 
@@ -31,7 +31,7 @@ class MainView extends React.Component {
       user: null
     };
   }
-  */
+  
 
   // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {    

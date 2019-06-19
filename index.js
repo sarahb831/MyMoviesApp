@@ -40,7 +40,7 @@ app.use(validator());
 const cors = require('cors');
 app.use(cors());
 
-/* bypassed since client side built
+/* bypassed since client side built */
 var allowedOrigins = ['*', 'http://localhost:1234'];
 app.use(cors({
   origin: function(origin, callback) {
@@ -53,7 +53,7 @@ app.use(cors({
   return callback(null, true);
 }
 }));
-*/
+
 app.use(bodyParser.json());
 
 var auth = require('./auth.js')(app); // so Express is available to auth.js also

@@ -38,9 +38,9 @@ const validator = require('express-validator');
 app.use(validator());
 
 const cors = require('cors');
-app.use(cors());
+//app.use(cors());
 
-/* bypassed since client side built */
+/* had been bypassed since client side built */
 var allowedOrigins = ['*', 'http://localhost:1234'];
 app.use(cors({
   origin: function(origin, callback) {

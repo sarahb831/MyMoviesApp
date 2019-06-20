@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 
 import { setFilter } from  '../../actions/actions';
 
-function SortColumnSelector(props) {
+function SortColumnSelection(props) {
     return (
         <Form>
             <Form.Group controlId="formSort">

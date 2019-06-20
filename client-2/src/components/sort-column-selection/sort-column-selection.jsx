@@ -2,48 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
 
 import { setFilter } from  '../../actions/actions';
 
 function SortColumnSelector(props) {
     return (
-        <div>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Sort By
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item value="title" selected>Title</Dropdown.Item>
-                    <Dropdown.Item value="Genre.Name">Genre</Dropdown.Item>
-                    <Dropdown.Item value="Director.Name">Director</Dropdown.Item>
-                </Dropdown.Menu>
-                Form.Control
-        onChange={e => props.setFilter(e.target.value)}
-        value={props.visibilityFilter}
-        placeholder="filter"
-        />;
-            </Dropdown>
-        </div>
-        )
+        <Form>
+            <Form.Group controlId="formSort">
+                <Form.Label>Sort Movies By...</Form.Label>
+                <Form.Control 
+                    as="select" 
+                    onChange={e => props.setSortColumn(e.target.value)}
+                    value={props.sortColumn}
+                    placeholder="sort-column">
+                    <option value="Title">Title</option>
+                    <option value="Genre.Name">Genre</option>
+                    <option value="Director.Name">Director</option>             
+                </Form.Control>
+            </Form.Group>
+        </Form>
+    )
 }
 
 export default connect(
-    ({visibilityFilter}) => ({visibilityFilter}), { setFilter }
-)(VisibilityFilterInput);
+    ({sortColumn}) => ({sortColumn}), { setFilter }
+)(SortColumnSelection);
 
-VisibilityFilterInput.propTypes = {
-    setFilter: PropTypes.func.isRequired,
-    visibilityFilter: PropTypes.func.isRequired
-  };
-
-export default connect(
-    ({visibilityFilter}) => ({visibilityFilter}), { setFilter }
-)(VisibilityFilterInput);
-
-VisibilityFilterInput.propTypes = {
-    setFilter: PropTypes.func.isRequired,
-    visibilityFilter: PropTypes.func.isRequired
+SortColumnSelection.propTypes = {
+    setSortColumn: PropTypes.func.isRequired,
+    sortColumn: PropTypes.func.isRequired
   };

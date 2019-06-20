@@ -29,6 +29,7 @@ function MoviesList(props) {
 
     return <div className = "movies-list">
         <VisibilityFilterInput/>
+        <SortColumnSelection/>
         {movies.map(m => <MovieCard key={m.id} movie={m}/>)}
     </div>;
 }

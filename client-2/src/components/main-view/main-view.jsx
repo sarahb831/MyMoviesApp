@@ -145,7 +145,7 @@ export default class MainView extends React.Component {
             } />
             <Route exact path="/users/:Username"
               render={({match}) =>
-            <ProfileView profile={user}/>}
+            <ProfileView profile={match.params.Username}/>}
             />
 
             

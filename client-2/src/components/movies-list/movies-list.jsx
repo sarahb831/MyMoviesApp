@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
+import SortColumnSelection from '../sort-column-selection/sort-column-selection';
 
 import MovieCard from '../movie-card/movie-card';
 

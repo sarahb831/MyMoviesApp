@@ -9,7 +9,7 @@ import { setFilter } from  '../../actions/actions';
 function VisibilityFilterInput(props) {
     return <Form.Control
         onChange={e => props.setFilter(e.target.value)}
-        value={props.visibility.filter}
+        value={props.visibilityFilter}
         placeholder="filter"
         />;
 }

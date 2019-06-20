@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { setMovies } from  '../../actions/actions'; // to import relevant actions
 
@@ -116,6 +117,11 @@ class MainView extends React.Component {
                 Signed in as: {user}
               </Navbar.Text>
               <Navbar.Collapse className="justify-content-end">
+              <Link to={`/users/:${user.Username}`}>
+                  <Button variant="link" className="button-primary">
+                    Profile
+                  </Button>
+                </Link>
                 <Button
                   variant="primary"
                   type="submit"

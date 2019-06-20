@@ -18,11 +18,12 @@ const mapStateToProps = state => {
         moviesToShow = moviesToShow.filter(m => m.title.includes(visibilityFilter));
     }
 
-    return { movies: moviesToShow};
+    return { movies: moviesToShow};  // sorted, filtered copy of "movies" is return as props
 };
 
 function MoviesList(props) {
-    const { movies } = props;
+    const { movies } = props; // sorted filtered copy of "movies" received as props 
+                                // due to connect()
 
     if (!movies) return <div className="main-view"/>;
 

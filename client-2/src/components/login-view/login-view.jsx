@@ -20,7 +20,7 @@ export default function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     /* send request to server for authentication */
-    axios.post('http://localhost:3000/login', {
+    axios.post('http://my-movie-app-smb.herokuapp.com/login', {
       Username: username,
       Password: password
     })
@@ -29,6 +29,7 @@ export default function LoginView(props) {
       props.onLoggedIn(data);
     })
     .catch(e => {
+      console.log(e);
       console.log('user not in system')
     });
   };

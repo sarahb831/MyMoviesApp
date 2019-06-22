@@ -109,8 +109,9 @@ export default function ProfileView(props) {
         </Card.Body>
       </Card>
 
+    if ((Array.isArray(props.profile.FavoriteMovies) && 
+      (props.profile.FavoriteMovies.length)) {
       <Card style={{ width: '16rem' }}>
-
         {props.profile.FavoriteMovies.map(m => (
           <Card.Body>
             <Card.Title>{m.Title}</Card.Title>
@@ -124,6 +125,7 @@ export default function ProfileView(props) {
           </Card.Body>
       ))}
       </Card>
+      }
     </div>
     );   
 }

@@ -28,6 +28,7 @@ class MainView extends React.Component {
   constructor() {
     super();
 
+    this.onLoggedIn = this.onLoggedIn.bind(this);
     this.state = {
       user: null
     };
@@ -46,11 +47,12 @@ class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('http://localhost:3000/movies', {
+    axios.get('http://my-movie-app-smb.herokuapp.com/movies', {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
       // movies moved here now
+      console.log('in getMovies .then()');
       this.props.setMovies(response.data);
     })
     .catch(function (error) {
@@ -60,6 +62,7 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData.user.Username);
+    console.log(authData.token);
     this.setState({
       user: authData.user.Username
     });
@@ -67,6 +70,8 @@ class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+    console.log('calling window.open');
+    window.open('/');
   }
 
   // remove?
@@ -85,7 +90,9 @@ class MainView extends React.Component {
   render() {
 
     const { user } = this.state;
-
+if (user) {
+  console.log("user not null: ",user.Username);
+}
     if (!user) return (
       <div>
         <Navbar bg="info" variant="light">

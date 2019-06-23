@@ -29,10 +29,8 @@ class MainView extends React.Component {
     super();
 
     this.onLoggedIn = this.onLoggedIn.bind(this);
-
     this.state = {
-      user: null,
-      userObject: {}
+      user: null
     };
   }
   
@@ -42,8 +40,7 @@ class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user'),
-        userObject: localStorage.getItem('userObject')
+        user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
     }
@@ -67,13 +64,11 @@ class MainView extends React.Component {
     console.log(authData.user.Username);
     console.log(authData.token);
     this.setState({
-      user: authData.user.Username,
-      userObject: authData.user
+      user: authData.user.Username
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    localStorage.setItem('userObject', authData.user);
     this.getMovies(authData.token);
     console.log('calling window.open');
     window.open('/');
@@ -89,15 +84,14 @@ class MainView extends React.Component {
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    localStorage.removeItem('userObject');
     console.log("localStorage cleared");
   }
 
   render() {
 
-    const { user, userObject } = this.state;
+    const { user } = this.state;
 if (user) {
-  console.log("user not null: ",user);
+  console.log("user not null: ",user.Username);
 }
     if (!user) return (
       <div>
@@ -169,8 +163,8 @@ if (user) {
               return <DirectorView director={match.params.name}/>}
             } />
             <Route exact path="/users/:Username"
-              render={() =>
-            <ProfileView profile={userObject}/>}
+              render={({match}) =>
+            <ProfileView profile={match.params.Username}/>}
             />
 
             

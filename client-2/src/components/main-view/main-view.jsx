@@ -2,6 +2,8 @@ import React from 'react';
 
 import axios from 'axios';
 
+import './main-view.scss';
+
 import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -14,7 +16,7 @@ import MoviesList from '../movies-list/movies-list';
 
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
-// import MovieCard from '../movie-card/movie-card';
+// import MovieCard from '../movie-card/movie-card'; // not used for react-redux version
 import MovieView from '../movie-view/movie-view';
 import DirectorView from '../director-view/director-view';
 import GenreView from '../genre-view/genre-view';
@@ -30,24 +32,37 @@ class MainView extends React.Component {
 
     this.onLoggedIn = this.onLoggedIn.bind(this);
     this.state = {
-      user: null
+      user: null,
+      movies: [],
+      userObject: {},
+      token: null
     };
   }
   
 
   // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {    
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
+    let accessToken;
+    const userObject = JSON.parse(localStorage.getItem('userObject'));
+    if (userObject !== null) accessToken = userObject.token;
+    if (userObject != null && accessToken != null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: userObject.user.Username,
+        userObject,
+        token: accessToken
       });
+      // updates from 3.5 changes
+    // let accessToken = localStorage.getItem('token');
+    //if (accessToken !== null) {
+    //  this.setState({
+    //    user: localStorage.getItem('user')
+    //  });
       this.getMovies(accessToken);
     }
   }
 
   getMovies(token) {
-    axios.get('http://my-movie-app-smb.herokuapp.com/movies', {
+    axios.get('https://my-movie-app-smb.herokuapp.com/movies', {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
@@ -64,14 +79,15 @@ class MainView extends React.Component {
     console.log(authData.user.Username);
     console.log(authData.token);
     this.setState({
-      user: authData.user.Username
+      user: authData.user.Username,
+      userObject: authData,
+      token: authData.token
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('userObject', authData.user);
     this.getMovies(authData.token);
-    console.log('calling window.open');
-    window.open('/');
   }
 
   // remove?
@@ -84,18 +100,21 @@ class MainView extends React.Component {
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('userObject');
+    window.location.href = 'http://localhost:3000/';
     console.log("localStorage cleared");
   }
 
   render() {
 
-    const { user } = this.state;
+    const { movies, user, token, userObject } = this.state;
 if (user) {
   console.log("user not null: ",user.Username);
 }
-    if (!user) return (
+    if (!user) return ( // navbar without Profile button
       <div>
-        <Navbar bg="info" variant="light">
+        <Navbar bg="info" variant="light" fixed="top" 
+          className="sticky-navbar navbar navbar-default navbar-fixed-top">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
               <Navbar.Text>
                 Signed in as: {user}
@@ -115,7 +134,7 @@ if (user) {
       </div>
     )
 
-    return (
+    return ( // navbar with Profile button
       <div>
         <div>
           <Navbar bg="info" variant="light">

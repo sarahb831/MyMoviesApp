@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import './registration-view.scss';
+
 import axios from 'axios';
 
 export default function RegistrationView(props) {
@@ -19,7 +21,7 @@ export default function RegistrationView(props) {
   const handleRegistration = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/
     /* send request to server for registration */
-    axios.post('http://localhost:3000/users', {
+    axios.post('https://my-movie-app-smb.herokuapp.com/users', {
       Username: username, 
       Password: password,
       Email: email,
@@ -28,10 +30,10 @@ export default function RegistrationView(props) {
     .then(response => {
       const data = response.data;
       console.log(data);
-      window.open('/');
+      window.location.href = "http://localhost:3000";
     })
     .catch(e => {
-      console.log('error registering user')
+      console.log(e, ': error registering user')
     });
   };
 

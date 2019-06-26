@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import { Link } from  'react-router-dom';
+
+import './genre-view.scss';
 
 export default class GenreView extends React.Component {
 
@@ -20,10 +25,14 @@ export default class GenreView extends React.Component {
 
 
     return (
-      <Card className = "genre-view" style={{ width: '18rem' }}>
+      <Container>
+      <Row>
+        <Col></Col>
+        <Col xs={12} md={8}>
+          <Card className = "genre-view" style={{ width: '18rem' }}>
         <Card.Body>
-          <Card.Title className = "genre-name">Genre {genre.Name}</Card.Title>
-          <Card.Text className = "genre-description">{genre.description}
+          <Card.Title className = "genre-name">Genre: {genre.Name}</Card.Title>
+          <Card.Text className = "genre-description">{genre.Description}
           </Card.Text>
         </Card.Body>
         
@@ -35,6 +44,11 @@ export default class GenreView extends React.Component {
           </Link>
         </Card.Body>
       </Card>
+      </Col>
+        <Col>
+        </Col>
+      </Row>
+    </Container>
     );
   }
 }

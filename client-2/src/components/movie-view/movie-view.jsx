@@ -62,4 +62,5 @@ MovieView.propTypes = {
 */
 
 export default connect(({movies}) => ({movies}))(MovieView);
+// transmits movies array without changes
 

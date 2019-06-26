@@ -13,7 +13,7 @@ here the movies are sorted and filtered for this component
 const mapStateToProps = state => {
     const { movies, visibilityFilter, sortColumn } = state;
 
-    let moviesToShow = movies.concat().sort((a,b) => { // copied with concat()
+    let moviesToShow = movies.concat().sort((a,b) => { // copies array with "concat()"
         if (a[sortColumn] < b[sortColumn]) return -1;
         if (a[sortColumn] > b[sortColumn]) return 1;
         return 0;

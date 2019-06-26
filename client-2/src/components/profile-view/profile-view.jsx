@@ -19,6 +19,8 @@ export default function ProfileView(props) {
   const [ email, setEmail ] = useState(props.profile.user.Email);
   const [ birthdate, setBirthdate ] = useState(props.profile.user.Birthdate);
 
+  //const { movies } = this.props;
+
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
     /* send request to server for update*/
@@ -68,6 +70,12 @@ export default function ProfileView(props) {
     .catch(e => {
       console.log('movie not found')
     });
+  }
+
+  let favoriteMovieDetails = [];
+  if (props.profile.user.FavoriteMovies && props.profile.user.FavoriteMovies.length) {
+  // eslint-disable-next-line
+    favoriteMovieDetails = props.profile.user.FavoriteMovies.map(mId => this.props.movies.find(m => mId == m._id));
   }
 
     return (
@@ -124,27 +132,27 @@ export default function ProfileView(props) {
         </Card.Body>
       </Card>
 
-      { props.profile.user.FavoriteMovies && props.profile.user.FavoriteMovies.length &&
-        props.profile.user.FavoriteMovies.map(movieId => {
-          movies.find(movieDetails => movieDetails._id===movieId)
-      <Card style={{ width: '16rem' }} key = {movieDetails._id}>
+      { favoriteMovieDetails && (favoriteMovieDetails.length > 0) &&
+        favoriteMovieDetails.map(movie => 
+        <Card style={{ width: '16rem' }} key = {movie._id}>
           <Card.Body>
-            <Card.Title>Title: {movieDetails.Title}</Card.Title>
-            <Card.Text>Description: {movieDetail.Description}</Card.Text>
+            <Card.Title>Title: {movie.Title}</Card.Title>
+            <Card.Text>Description: {movie.Description}</Card.Text>
             <Button 
               variant="primary" 
-              onClick = {() => handleMovieDelete(movieDetails._id)}
+              onClick = {() => handleMovieDelete(movie._id)}
               className = "button-primary">
               Delete From Favorites
             </Button>
           </Card.Body>
           </Card>
+          )
+        }
           </Col>
           <Col>
           </Col>
           </Row>
-          </Container>
-        })}
+          </Container>        
         </div>
     );   
 }

@@ -137,17 +137,23 @@ if (user) {
     return ( // navbar with Profile button
       <div>
         <div>
-          <Navbar bg="info" variant="light">
+          <Navbar bg="info" variant="light"fixed="top" 
+            className="sticky-navbar navbar navbar-default navbar-fixed-top">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
               <Navbar.Text>
                 Signed in as: {user}
               </Navbar.Text>
               <Navbar.Collapse className="justify-content-end">
-              <Link to={`/users/:${user.Username}`}>
-                  <Button variant="link" className="button-primary">
+                <Router>
+              <Link to={`/users/${user}`}>
+                  <Button variant="link" 
+                    type="submit"
+                    className="button-profile"
+                    size="sm">
                     Profile
                   </Button>
                 </Link>
+                </Router>
                 <Button
                   variant="primary"
                   type="submit"
@@ -163,7 +169,7 @@ if (user) {
         <div className = "main-view">
           <Route exact path="/" 
             render={() => {
-              if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
               return <MoviesList/>;
             }
           }/>
@@ -173,20 +179,20 @@ if (user) {
             render={({match}) => <MovieView movieId={match.params.id}/>}/>
           <Route  exact path="/genres/:name"
             render={({ match }) => {
-            //  if (!movies || !movies.length) return <div className="main-view"/>;
+              if (!movies || !movies.length) return <div className="main-view"/>;
               return <GenreView genre={match.params.name}/>}
-            } />
+              } />
             <Route exact path="/directors/:name"
             render={({match}) => {
-             // if (!movies || !movies.length) return <div className="main-view"/>;
+              if (!movies || !movies.length) return <div className="main-view"/>;
               return <DirectorView director={match.params.name}/>}
             } />
             <Route exact path="/users/:Username"
-              render={({match}) =>
-            <ProfileView profile={match.params.Username}/>}
-            />
-
-            
+              render={({match}) => {
+                if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
+                return <ProfileView profile={userObject} token={token} movies={movies}/>
+              }
+            }/>
         </div>
      </Router>
      </div>

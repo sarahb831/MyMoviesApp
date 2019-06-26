@@ -2,14 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import { Link } from  'react-router-dom';
+
+import './movie-card.scss';
 
 export default class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
 
     return (
+      <Container>
+      <Row>
+        <Col></Col>
+        <Col xs={12} md={8}>
       <Card style={{ width: '16rem' }}>
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
@@ -24,6 +33,11 @@ export default class MovieCard extends React.Component {
           </Link>
         </Card.Body>
       </Card>
+      </Col>
+        <Col>
+        </Col>
+      </Row>
+    </Container>
     );
   }
 }

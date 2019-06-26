@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
 import axios from 'axios';
 
+import './profile-view.scss';
+
 import { Link } from  'react-router-dom';
 
 export default function ProfileView(props) {
-  const [ username, setUsername ] = useState(props.profile.Username);
-  const [ password, setPassword ] = useState(props.profile.Password);
-  const [ email, setEmail ] = useState(props.profile.Email);
-  const [ birthdate, setBirthdate ] = useState(props.profile.Birthdate);
+  const [ username, setUsername ] = useState(props.profile.user.Username);
+  const [ password, setPassword ] = useState(props.profile.user.Password);
+  const [ email, setEmail ] = useState(props.profile.user.Email);
+  const [ birthdate, setBirthdate ] = useState(props.profile.user.Birthdate);
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
     /* send request to server for update*/
-      axios.put('http://localhost:3000/users/:Username', {
+    axios.put(`https://my-movie-app-smb.herokuapp.com/users/${username}`, {
+      headers: {Authorization: `Bearer ${props.token}`}
+    },{
         Username: username,
         Password: password,
         Email: email,
@@ -29,14 +36,16 @@ export default function ProfileView(props) {
         console.log(data);
      })
      .catch(e => {
-       console.log('user not in system')
+       console.log(e, ': user not in system')
      });
   };
 
   const handleProfileDelete = (e) => {
     e.preventDefault(); 
     /* send request to server for update*/
-      axios.delete('http://localhost:3000/users/:Username')
+    axios.delete(`https://my-movie-app-smb.herokuapp.com/users/${username}`, {
+      headers: {Authorization: `Bearer ${props.token}`}
+    })
       .then(response => {
         const data = response.data;
         console.log("profile deleted");
@@ -48,11 +57,13 @@ export default function ProfileView(props) {
   };
 
   function handleMovieDelete(movieId) {
-    axios.delete('http://localhost:3000/users/:Username/:MovieID')
+    axios.delete(`https://my-movie-app-smb.herokuapp.com/users/${username}/${movieId}`, {
+      headers: {Authorization: `Bearer ${props.token}`}
+    })
     .then(response => {
       const data = response.data;
       console.log("movie deleted from favorites");
-      console.log(data);
+      console.log("in handleMovieDelete(), data: ",data);
     })
     .catch(e => {
       console.log('movie not found')
@@ -61,7 +72,11 @@ export default function ProfileView(props) {
 
     return (
     <div>
-      <Form>
+       <Container>
+      <Row>
+        <Col></Col>
+        <Col xs={12} md={8}>
+          <Form>
         <Form.Group controlId="formGroupUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder={username} 
@@ -109,24 +124,28 @@ export default function ProfileView(props) {
         </Card.Body>
       </Card>
 
-    if ((Array.isArray(props.profile.FavoriteMovies) && 
-      (props.profile.FavoriteMovies.length)) {
-      <Card style={{ width: '16rem' }}>
-        {props.profile.FavoriteMovies.map(m => (
+      { props.profile.user.FavoriteMovies && props.profile.user.FavoriteMovies.length &&
+        props.profile.user.FavoriteMovies.map(movieId => {
+          movies.find(movieDetails => movieDetails._id===movieId)
+      <Card style={{ width: '16rem' }} key = {movieDetails._id}>
           <Card.Body>
-            <Card.Title>{m.Title}</Card.Title>
-            <Card.Text>{m.Description}</Card.Text>
+            <Card.Title>Title: {movieDetails.Title}</Card.Title>
+            <Card.Text>Description: {movieDetail.Description}</Card.Text>
             <Button 
-              variant="link" 
-              onClick = {handleMovieDelete(m._id)}
+              variant="primary" 
+              onClick = {() => handleMovieDelete(movieDetails._id)}
               className = "button-primary">
               Delete From Favorites
             </Button>
           </Card.Body>
-      ))}
-      </Card>
-      }
-    </div>
+          </Card>
+          </Col>
+          <Col>
+          </Col>
+          </Row>
+          </Container>
+        })}
+        </div>
     );   
 }
 

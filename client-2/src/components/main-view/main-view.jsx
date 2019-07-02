@@ -43,7 +43,7 @@ class MainView extends React.Component {
   // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {    
     let accessToken;
-    const userObject = JSON.parse(localStorage.getItem('userObject'));
+    const userObject = localStorage.getItem('userObject');
     if (userObject !== null) accessToken = userObject.token;
     if (userObject != null && accessToken != null) {
       this.setState({

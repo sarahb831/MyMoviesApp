@@ -28,9 +28,11 @@ export default function LoginView(props) {
     })
     .then(response => {
       const data = response.data;
-      localStorage.setItem("userObject", JSON.stringify(data)); // store stringified userObject in localStorage
+      //localStorage.setItem("userObject", JSON.stringify(data)); // store stringified userObject in localStorage
+      localStorage.setItem('userObject',data);
+
       props.onLoggedIn(data); //keep?
-      window.location.href = "http://localhost:3000"; // return to main display after complete
+     // window.location.href = "http://localhost:3000"; // return to main display after complete
     })
     .catch(e => {
       console.log(e);

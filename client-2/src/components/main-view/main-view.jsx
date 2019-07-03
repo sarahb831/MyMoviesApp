@@ -39,8 +39,6 @@ class MainView extends React.Component {
     };
   }
   
-
-  // change back to 'http://my-movie-app-smb.herokuapp.com/movies' once git push to Heroku resolved
   componentDidMount() {    
     let accessToken;
     const userObject = localStorage.getItem('userObject');
@@ -51,12 +49,6 @@ class MainView extends React.Component {
         userObject,
         token: accessToken
       });
-      // updates from 3.5 changes
-    // let accessToken = localStorage.getItem('token');
-    //if (accessToken !== null) {
-    //  this.setState({
-    //    user: localStorage.getItem('user')
-    //  });
       this.getMovies(accessToken);
     }
   }
@@ -91,12 +83,12 @@ class MainView extends React.Component {
   }
 
   // remove?
-  onMainViewClick() {
+  /*onMainViewClick() {
     this.setState({
       selectedMovie: null
     });
   }
-
+*/
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -105,47 +97,30 @@ class MainView extends React.Component {
     console.log("localStorage cleared");
   }
 
+  getFavoriteMoviesDetails(userObject, movies) {
+    let favoriteMoviesDetails = [];
+    if ((userObject !== undefined) && 
+      (userObject.userObject.user.FavoriteMovies != null) && 
+      (userObject.userObject.user.FavoriteMovies.length > 0) && movies) {
+      favoriteMoviesDetails = movies.movies.filter(movie => userObject.userObject.user.FavoriteMovies.includes(movie._id));
+    }
+    return favoriteMoviesDetails;
+  } 
+
   render() {
-
     const { movies, user, token, userObject } = this.state;
-if (user) {
-  console.log("user not null: ",user.Username);
-}
-    if (!user) return ( // navbar without Profile button
-      <div>
-        <Navbar bg="info" variant="light" fixed="top" 
-          className="sticky-navbar navbar navbar-default navbar-fixed-top">
-              <Navbar.Brand href="#home">myMovies</Navbar.Brand>
-              <Navbar.Text>
-                Signed in as: {user}
-              </Navbar.Text>
-              <Navbar.Collapse className="justify-content-end">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className = "button-logout"
-                  size="sm"
-                  onClick = {this.handleLogout}>
-                  Logout
-                </Button>
-              </Navbar.Collapse>
-            </Navbar>
-            <LoginView onLoggedIn={this.onLoggedIn}/>
-      </div>
-    )
-
-    return ( // navbar with Profile button
+    return ( 
       <div>
         <div>
           <Navbar bg="info" variant="light"fixed="top" 
             className="sticky-navbar navbar navbar-default navbar-fixed-top">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
-              <Navbar.Text>
+              { user !== null && <Navbar.Text>
                 Signed in as: {user}
               </Navbar.Text>
+              }
               <Navbar.Collapse className="justify-content-end">
-                <Router>
-              <Link to={`/users/${user}`}>
+                { user !== null && <Link to={`/users/${user}`}>
                   <Button variant="link" 
                     type="submit"
                     className="button-profile"
@@ -153,7 +128,7 @@ if (user) {
                     Profile
                   </Button>
                 </Link>
-                </Router>
+                }
                 <Button
                   variant="primary"
                   type="submit"
@@ -190,7 +165,8 @@ if (user) {
             <Route exact path="/users/:Username"
               render={({match}) => {
                 if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
-                return <ProfileView profile={userObject} token={token} movies={movies}/>
+                return <ProfileView profile={userObject} token={token} 
+                  movies={() => this.getFavoriteMoviesDetails({userObject},{movies})}/>;
               }
             }/>
         </div>

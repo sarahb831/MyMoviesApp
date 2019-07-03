@@ -18,8 +18,7 @@ export default function ProfileView(props) {
   const [ password, setPassword ] = useState(props.profile.user.Password);
   const [ email, setEmail ] = useState(props.profile.user.Email);
   const [ birthdate, setBirthdate ] = useState(props.profile.user.Birthdate);
-
-  //const { movies } = this.props;
+  const [ favoriteMoviesDetails ] = userState(props.movies);
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
@@ -35,7 +34,6 @@ export default function ProfileView(props) {
       .then(response => {
         const data = response.data;
         console.log("profile updated");
-        console.log(data);
      })
      .catch(e => {
        console.log(e, ': user not in system')
@@ -50,11 +48,10 @@ export default function ProfileView(props) {
     })
       .then(response => {
         const data = response.data;
-        console.log("profile deleted");
-        console.log(data);
+        console.log("profile deleted", data);
      })
      .catch(e => {
-       console.log('user not in system')
+       console.log(e,': user not in system')
      });
   };
 
@@ -65,17 +62,10 @@ export default function ProfileView(props) {
     .then(response => {
       const data = response.data;
       console.log("movie deleted from favorites");
-      console.log("in handleMovieDelete(), data: ",data);
     })
     .catch(e => {
       console.log('movie not found')
     });
-  }
-
-  let favoriteMovieDetails = [];
-  if (props.profile.user.FavoriteMovies && props.profile.user.FavoriteMovies.length) {
-  // eslint-disable-next-line
-    favoriteMovieDetails = props.profile.user.FavoriteMovies.map(mId => this.props.movies.find(m => mId == m._id));
   }
 
     return (

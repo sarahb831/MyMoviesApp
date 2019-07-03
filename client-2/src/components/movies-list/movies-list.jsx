@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from  'react-router-dom';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import SortColumnSelection from '../sort-column-selection/sort-column-selection';
@@ -29,13 +30,21 @@ const mapStateToProps = state => {
 function MoviesList(props) {
     const { movies } = props; // sorted filtered copy of "movies" received as props 
                                 // due to connect()
+    const { user } = props;
 
     if (!movies) return <div className="main-view"/>;
 
     return <div className = "movies-list">
+        <Link to={`/users/${user}`}>
+            <Button 
+                variant="link" 
+                className = "button-primary">
+                User Profile
+            </Button>
+        </Link>
         <VisibilityFilterInput/>
         <SortColumnSelection/>
-        {movies.map(m => <MovieCard key={m.id} movie={m}/>)}
+        {movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
     </div>;
 }
 

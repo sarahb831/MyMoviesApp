@@ -150,8 +150,8 @@ class MainView extends React.Component {
           }/>
   
           <Route path="/register" render={() => <RegistrationView />} />
-          <Route path="/movies/:id" 
-            render={({match}) => <MovieView movieId={match.params.id}/>}/>
+          <Route path="/movies/:movieId" 
+            render={({match}) => <MovieView movieId={match.params.movieId}/>}/>
           <Route  exact path="/genres/:name"
             render={({ match }) => {
               if (!movies || !movies.length) return <div className="main-view"/>;

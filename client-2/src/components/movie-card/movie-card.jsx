@@ -13,7 +13,6 @@ import './movie-card.scss';
 export default class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
-
     return (
       <Container>
       <Row>

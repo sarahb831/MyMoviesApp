@@ -32,7 +32,7 @@ export default function ProfileView(props) {
         Birthdate: birthdate
       })
       .then(response => {
-        const data = response.data;
+        //const data = response.data;
         console.log("profile updated");
      })
      .catch(e => {
@@ -60,7 +60,7 @@ export default function ProfileView(props) {
       headers: {Authorization: `Bearer ${props.token}`}
     })
     .then(response => {
-      const data = response.data;
+      //const data = response.data;
       console.log("movie deleted from favorites");
     })
     .catch(e => {

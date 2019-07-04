@@ -22,7 +22,7 @@ const mapStateToProps = state => {
     });
 
     if (visibilityFilter !== '') {
-        moviesToShow = moviesToShow.filter(m => m.title.includes(visibilityFilter));
+        moviesToShow = moviesToShow.filter(movie => movie.title.includes(visibilityFilter));
     }
 
     return { movies: moviesToShow};  // sorted, filtered copy of "movies" is return as props
@@ -31,7 +31,7 @@ const mapStateToProps = state => {
 function MoviesList(props) {
     const { movies } = props; // sorted filtered copy of "movies" received as props 
                                 // due to connect()
-    const { user } = props;
+    const { user } = props; // passed as prop from MainView
 
     if (!movies) return <div className="main-view"/>;
 

@@ -14,7 +14,7 @@ function MovieView(props) {
   if (!movies || !movies.length) return null;
 
   // eslint-disable-next-line
-  const movie = movies.find(m => m._id == movieId); // note not strict equality here
+  const movie = movies.find(movie => movie._id == movieId); // note not strict equality here
 
   return (
       <Card className = "movie-view" style={{ width: '18rem' }}>

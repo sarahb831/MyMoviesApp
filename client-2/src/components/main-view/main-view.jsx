@@ -70,12 +70,12 @@ class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData.user.Username);
     console.log(authData.token);
-    this.setState({
+   this.setState({
       user: authData.user.Username,
       userObject: authData,
       token: authData.token
     });
-
+  
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     localStorage.setItem('userObject', authData.user);

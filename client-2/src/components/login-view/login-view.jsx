@@ -10,6 +10,9 @@ import Col from 'react-bootstrap/Col';
 import './login-view.scss';
 
 import { Link } from  'react-router-dom';
+//import { connect } from 'react-redux';
+
+//import { setUser } from  '../../actions/actions'
 
 import PropTypes from 'prop-types';
 
@@ -28,6 +31,8 @@ export default function LoginView(props) {
     })
     .then(response => {
       const data = response.data;
+      console.log("LoginView data:",data);
+      //this.props.setUser(response.data);
       //localStorage.setItem("userObject", JSON.stringify(data)); // store stringified userObject in localStorage
       localStorage.setItem('userObject',data);
 
@@ -89,6 +94,8 @@ export default function LoginView(props) {
     </Container>
   );
 }
+
+//export default connect(null, { setUser } )(LoginView);
 
   LoginView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired

@@ -18,7 +18,7 @@ export default function ProfileView(props) {
   const [ password, setPassword ] = useState(props.profile.user.Password);
   const [ email, setEmail ] = useState(props.profile.user.Email);
   const [ birthdate, setBirthdate ] = useState(props.profile.user.Birthdate);
-  const [ favoriteMoviesDetails ] = userState(props.movies);
+  const [ favoriteMoviesDetails ] = useState(props.movies);
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
@@ -122,8 +122,8 @@ export default function ProfileView(props) {
         </Card.Body>
       </Card>
 
-      { favoriteMovieDetails && (favoriteMovieDetails.length > 0) &&
-        favoriteMovieDetails.map(movie => 
+      { favoriteMoviesDetails && (favoriteMoviesDetails.length > 0) &&
+        favoriteMoviesDetails.map(movie => 
         <Card style={{ width: '16rem' }} key = {movie._id}>
           <Card.Body>
             <Card.Title>Title: {movie.Title}</Card.Title>

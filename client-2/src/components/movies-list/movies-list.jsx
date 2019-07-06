@@ -48,7 +48,7 @@ function MoviesList(props) {
         <Link to={`/users/${user}`}>
             <Button 
                 variant="link" 
-                className = "button-primary">
+                className = "button-secondary">
                 User Profile
             </Button>
         </Link>

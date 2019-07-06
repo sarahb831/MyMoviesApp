@@ -97,13 +97,17 @@ class MainView extends React.Component {
     console.log("localStorage cleared");
   }
 
-  getFavoriteMoviesDetails(userObject, movies) {
+  getFavoriteMoviesDetails(userObject) {
+    const { movies } = this.state;
     let favoriteMoviesDetails = [];
+    console.log('userObject:',userObject ? userObject : null);
+    console.log('userObject.userObject.user.Username:', userObject.userObject.user.Username ? userObject.userObject.user.Username : 'does not exist');
     if ((userObject !== undefined) && 
       (userObject.userObject.user.FavoriteMovies != null) && 
       (userObject.userObject.user.FavoriteMovies.length > 0) && movies) {
-      favoriteMoviesDetails = movies.movies.filter(movie => userObject.userObject.user.FavoriteMovies.includes(movie._id));
+      favoriteMoviesDetails = movies.filter(movie => userObject.userObject.user.FavoriteMovies.includes(movie._id));
     }
+    console.log('favMoviesDetails:',favoriteMoviesDetails ? favoriteMoviesDetails : 'no fav movies found');
     return favoriteMoviesDetails;
   } 
 
@@ -166,7 +170,7 @@ class MainView extends React.Component {
               render={({match}) => {
                 if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
                 return <ProfileView profile={userObject} token={token} 
-                  movies={() => this.getFavoriteMoviesDetails({userObject},{movies})}/>;
+                  movies={() => this.getFavoriteMoviesDetails({userObject})}/>;
               }
             }/>
         </div>

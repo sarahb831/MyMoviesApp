@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
 
-import { setFilter } from  '../../actions/actions';
+import { setSortColumn } from  '../../actions/actions';
 
-function SortColumnSelection(props) {
+ function SortColumnSelection(props) {
     return (
         <Form>
             <Form.Group controlId="formSort">
@@ -25,11 +25,16 @@ function SortColumnSelection(props) {
     )
 }
 
+
 export default connect(
-    ({sortColumn}) => ({sortColumn}), { setFilter }
+    ({sortColumn}) => ({sortColumn}), { setSortColumn }
 )(SortColumnSelection);
 
-SortColumnSelection.propTypes = {
+
+
+
+/*SortColumnSelection.propTypes = {
     setSortColumn: PropTypes.func.isRequired,
     sortColumn: PropTypes.func.isRequired
   };
+  */

@@ -15,13 +15,22 @@ here the movies are sorted and filtered for this component
 const mapStateToProps = state => {
     const { movies, visibilityFilter, sortColumn } = state;
 
+    console.log('movies-list, mSTP, sortColumn:',sortColumn);
+    console.log('movies-list, mSTP,movies:',movies);
+   console.log('movies[0]:',movies[0]);
+    //console.log('movies.movies[0].Director.Name:' ,movies[0].Director.Name);
+
     let moviesToShow = movies.concat().sort((a,b) => { // copies array with "concat()"
+    console.log('a[sortColumn]:',a[sortColumn]);
+    console.log('b[sortColumn]:',b[sortColumn]);
         if (a[sortColumn] < b[sortColumn]) return -1;
         if (a[sortColumn] > b[sortColumn]) return 1;
         return 0;
     });
 
-    if (visibilityFilter !== '') {
+    if (visibilityFilter && visibilityFilter !== '') {
+        console.log('M-Link, visF:',visibilityFilter);
+        console.log('moviesToShow.:', moviesToShow);
         moviesToShow = moviesToShow.filter(movie => movie.title.includes(visibilityFilter));
     }
 
@@ -30,7 +39,7 @@ const mapStateToProps = state => {
 
 function MoviesList(props) {
     const { movies } = props; // sorted filtered copy of "movies" received as props 
-                                // due to connect()
+                                // from mapStateToProps() due to connect()
     const { user } = props; // passed as prop from MainView
 
     if (!movies) return <div className="main-view"/>;

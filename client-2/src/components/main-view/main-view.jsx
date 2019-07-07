@@ -31,12 +31,12 @@ class MainView extends React.Component {
     super();
 
     this.onLoggedIn = this.onLoggedIn.bind(this);
-    this.state = {
+   /* this.state = {
       user: null,
       movies: [],
       userObject: {},
       token: null
-    };
+    };*/
   }
   
   componentDidMount() {    
@@ -44,11 +44,12 @@ class MainView extends React.Component {
     const userObject = localStorage.getItem('userObject');
     if (userObject !== null) accessToken = userObject.token;
     if (userObject != null && accessToken != null) {
-      this.setState({
+     /* this.setState({
         user: userObject.user.Username,
         userObject,
         token: accessToken
-      });
+        
+      });*/
       this.getMovies(accessToken);
     }
   }
@@ -67,8 +68,9 @@ class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(authData) {
-    console.log(authData.user.Username);
+  onLoggedIn() {
+    const { userObject } = this.props;
+   /* console.log(authData.user.Username);
     console.log(authData.token);
    this.setState({
       user: authData.user.Username,
@@ -79,49 +81,52 @@ class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     localStorage.setItem('userObject', authData.user);
-    this.getMovies(authData.token);
+    */
+    this.getMovies(userObject.token);
   }
 
 
   handleLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
     localStorage.removeItem('userObject');
     window.location.href = 'http://localhost:3000/';
     console.log("localStorage cleared");
   }
 
-  getFavoriteMoviesDetails(userObject, movies) {
-   // const { movies } = this.state;
+  getFavoriteMoviesDetails() {
+   const { movies, userObject } = this.props;
     console.log('gFMD movies:',movies);
     let favoriteMoviesDetails = [];
     console.log('userObject:',userObject ? userObject : null);
+    console.log('userObject.user.Username:', userObject.user.Username ? userObject.user.Username : 'does not exist');
     console.log('userObject.userObject.user.Username:', userObject.userObject.user.Username ? userObject.userObject.user.Username : 'does not exist');
     if ((userObject !== undefined) && 
-      (userObject.userObject.user.FavoriteMovies != null) && 
-      (userObject.userObject.user.FavoriteMovies.length > 0) && movies) {
-      favoriteMoviesDetails = movies.movies.filter(movie => userObject.userObject.user.FavoriteMovies.includes(movie._id));
+      (userObject.user.FavoriteMovies != null) && 
+      (userObject.user.FavoriteMovies.length > 0) && movies) {
+      favoriteMoviesDetails = movies.filter(movie => userObject.user.FavoriteMovies.includes(movie._id));
     }
     console.log('favMoviesDetails:',favoriteMoviesDetails ? favoriteMoviesDetails : 'no fav movies found');
     return favoriteMoviesDetails;
   } 
 
   render() {
-    const { movies } = this.props;
-    const { user, token, userObject } = this.state;
+    const { movies, userObject } = this.props;
+   // const { user, token, userObject } = this.state;
     console.log('render, movies', movies);
+    console.log('render, userObject',userObject);
+    const username = userObject ? userObject.user.Username : null;
+    //const token = userObject ? userObject.token : null;
     return ( 
       <div>
         <div>
           <Navbar bg="info" variant="light"fixed="top" 
             className="sticky-navbar navbar navbar-default navbar-fixed-top">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
-              { user !== null && <Navbar.Text>
-                Signed in as: {user}
+              { username !== null && <Navbar.Text>
+                Signed in as: {username}
               </Navbar.Text>
               }
               <Navbar.Collapse className="justify-content-end">
-                { user !== null && <Link to={`/users/${user}`}>
+                { username !== null && <Link to={`/users/${username}`}>
                   <Button variant="link" 
                     type="submit"
                     className="button-profile"
@@ -145,8 +150,8 @@ class MainView extends React.Component {
         <div className = "main-view">
           <Route exact path="/" 
             render={() => {
-              if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
-              return <MoviesList user={user}/>;
+              if (!username) return <LoginView onLoggedIn={this.onLoggedIn} />;
+              return <MoviesList user={username}/>;
             }
           }/>
   
@@ -165,9 +170,9 @@ class MainView extends React.Component {
             } />
             <Route exact path="/users/:Username"
               render={({match}) => {
-                if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
-                return <ProfileView profile={userObject} token={token} 
-                  movies={() => this.getFavoriteMoviesDetails({userObject},{movies})}/>;
+                if (!username) return <LoginView onLoggedIn={this.onLoggedIn} />;
+                return <ProfileView 
+                  movies={() => this.getFavoriteMoviesDetails()}/>;
               }
             }/>
         </div>
@@ -177,4 +182,4 @@ class MainView extends React.Component {
   }
 }
 
-export default connect(({movies}) => ({movies}), { setMovies } )(MainView);
+export default connect(({moviesApp}) => ({moviesApp}), { setMovies } )(MainView);

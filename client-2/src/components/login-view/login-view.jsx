@@ -10,15 +10,15 @@ import Col from 'react-bootstrap/Col';
 import './login-view.scss';
 
 import { Link } from  'react-router-dom';
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
-//import { setUser } from  '../../actions/actions'
+import { setUser } from  '../../actions/actions'
 
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-export default function LoginView(props) {
+function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
@@ -32,11 +32,10 @@ export default function LoginView(props) {
     .then(response => {
       const data = response.data;
       console.log("LoginView data:",data);
-      //this.props.setUser(response.data);
-      //localStorage.setItem("userObject", JSON.stringify(data)); // store stringified userObject in localStorage
       localStorage.setItem('userObject',data);
+      this.props.setUser(data);
 
-      props.onLoggedIn(data); //keep?
+      props.onLoggedIn(); //keep?
      // window.location.href = "http://localhost:3000"; // return to main display after complete
     })
     .catch(e => {
@@ -95,7 +94,7 @@ export default function LoginView(props) {
   );
 }
 
-//export default connect(null, { setUser } )(LoginView);
+export default connect(null, { setUser } )(LoginView);
 
   LoginView.propTypes = {
     onLoggedIn: PropTypes.func.isRequired

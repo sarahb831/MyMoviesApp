@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { setUser } from  '../../actions/actions'; 
+
+//import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,18 +17,21 @@ import './profile-view.scss';
 
 import { Link } from  'react-router-dom';
 
-export default function ProfileView(props) {
-  const [ username, setUsername ] = useState(props.profile.user.Username);
-  const [ password, setPassword ] = useState(props.profile.user.Password);
-  const [ email, setEmail ] = useState(props.profile.user.Email);
-  const [ birthdate, setBirthdate ] = useState(props.profile.user.Birthdate);
+function ProfileView(props) {
+  const profile = this.props.userObject;
+  const token = this.props.userObject.token;
+  
+  const [ username, setUsername ] = useState(profile.user.Username);
+  const [ password, setPassword ] = useState(profile.user.Password);
+  const [ email, setEmail ] = useState(profile.user.Email);
+  const [ birthdate, setBirthdate ] = useState(profile.user.Birthdate);
   const [ favoriteMoviesDetails ] = useState(props.movies);
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
     /* send request to server for update*/
     axios.put(`https://my-movie-app-smb.herokuapp.com/users/${username}`, {
-      headers: {Authorization: `Bearer ${props.token}`}
+      headers: {Authorization: `Bearer ${token}`}
     },{
         Username: username,
         Password: password,
@@ -32,8 +39,8 @@ export default function ProfileView(props) {
         Birthdate: birthdate
       })
       .then(response => {
-        //const data = response.data;
         console.log("profile updated");
+        this.props.setUser(response.data);
      })
      .catch(e => {
        console.log(e, ': user not in system')
@@ -44,10 +51,11 @@ export default function ProfileView(props) {
     e.preventDefault(); 
     /* send request to server for update*/
     axios.delete(`https://my-movie-app-smb.herokuapp.com/users/${username}`, {
-      headers: {Authorization: `Bearer ${props.token}`}
+      headers: {Authorization: `Bearer ${token}`}
     })
       .then(response => {
         const data = response.data;
+        this.props.setUser({});
         console.log("profile deleted", data);
      })
      .catch(e => {
@@ -62,6 +70,7 @@ export default function ProfileView(props) {
     .then(response => {
       //const data = response.data;
       console.log("movie deleted from favorites");
+      // this should update store with revised favoirte movies for user
     })
     .catch(e => {
       console.log('movie not found')
@@ -146,11 +155,13 @@ export default function ProfileView(props) {
         </div>
     );   
 }
+export default connect(({userObject}) => ({userObject}), { setUser } )(ProfileView);
 
-ProfileView.propTypes = {
+/*ProfileView.propTypes = {
   profile: PropTypes.shape({
     Username: PropTypes.string,
     Password: PropTypes.string,
     Email: PropTypes.string
   }).isRequired
 };
+*/

@@ -82,13 +82,7 @@ class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  // remove?
-  /*onMainViewClick() {
-    this.setState({
-      selectedMovie: null
-    });
-  }
-*/
+
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -97,22 +91,25 @@ class MainView extends React.Component {
     console.log("localStorage cleared");
   }
 
-  getFavoriteMoviesDetails(userObject) {
-    const { movies } = this.state;
+  getFavoriteMoviesDetails(userObject, movies) {
+   // const { movies } = this.state;
+    console.log('gFMD movies:',movies);
     let favoriteMoviesDetails = [];
     console.log('userObject:',userObject ? userObject : null);
     console.log('userObject.userObject.user.Username:', userObject.userObject.user.Username ? userObject.userObject.user.Username : 'does not exist');
     if ((userObject !== undefined) && 
       (userObject.userObject.user.FavoriteMovies != null) && 
       (userObject.userObject.user.FavoriteMovies.length > 0) && movies) {
-      favoriteMoviesDetails = movies.filter(movie => userObject.userObject.user.FavoriteMovies.includes(movie._id));
+      favoriteMoviesDetails = movies.movies.filter(movie => userObject.userObject.user.FavoriteMovies.includes(movie._id));
     }
     console.log('favMoviesDetails:',favoriteMoviesDetails ? favoriteMoviesDetails : 'no fav movies found');
     return favoriteMoviesDetails;
   } 
 
   render() {
-    const { movies, user, token, userObject } = this.state;
+    const { movies } = this.props;
+    const { user, token, userObject } = this.state;
+    console.log('render, movies', movies);
     return ( 
       <div>
         <div>
@@ -170,7 +167,7 @@ class MainView extends React.Component {
               render={({match}) => {
                 if (!user) return <LoginView onLoggedIn={this.onLoggedIn} />;
                 return <ProfileView profile={userObject} token={token} 
-                  movies={() => this.getFavoriteMoviesDetails({userObject})}/>;
+                  movies={() => this.getFavoriteMoviesDetails({userObject},{movies})}/>;
               }
             }/>
         </div>
@@ -180,4 +177,4 @@ class MainView extends React.Component {
   }
 }
 
-export default connect(null, { setMovies } )(MainView);
+export default connect(({movies}) => ({movies}), { setMovies } )(MainView);

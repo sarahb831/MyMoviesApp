@@ -33,7 +33,7 @@ function LoginView(props) {
       const data = response.data;
       console.log("LoginView data:",data);
       localStorage.setItem('userObject',data);
-      this.props.setUser(data);
+      props.setUser(data);
 
       props.onLoggedIn(); //keep?
      // window.location.href = "http://localhost:3000"; // return to main display after complete

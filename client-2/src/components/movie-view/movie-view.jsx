@@ -15,7 +15,7 @@ function MovieView(props) {
 
   // eslint-disable-next-line
   const movie = movies.find(movie => movie._id == movieId); // note not strict equality here
-
+console.log('movieview movie:',movie);
   return (
       <Card className = "movie-view" style={{ width: '18rem' }}>
         <Card.Img variant="top" src={movie.ImagePath} className = "movie-poster" />
@@ -26,12 +26,12 @@ function MovieView(props) {
         </Card.Body>
         
         <Card.Body>
-          <Link to={`/directors/${movie.Director.Name}`}>
+          <Link to={`/directors/${movie._id}`}>
             <Button variant="link" className="button-primary">
               Director
             </Button>
           </Link>
-          <Link to={`genres/${movie.Genre.Name}`}>
+          <Link to={`genres/${movie._id}`}>
             <Button variant="link" className="button-primary">
               Genre
             </Button>

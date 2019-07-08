@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from  'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
+import './movies-list.scss';
+
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import SortColumnSelection from '../sort-column-selection/sort-column-selection';
 
@@ -59,7 +61,7 @@ function MoviesList(props) {
         </Link>
         <VisibilityFilterInput/>
         <SortColumnSelection/>
-        {movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
+        {movies.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
     </div>;
 }
 

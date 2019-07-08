@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
+import './sort-column-selection.scss';
 
 import { setSortColumn } from  '../../actions/actions';
 

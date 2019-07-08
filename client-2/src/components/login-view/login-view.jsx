@@ -54,6 +54,7 @@ function LoginView(props) {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
+                autoFocus="autofocus"
                 value={username}
                 placeholder="Username"
                 onChange = {e => setUsername(e.target.value)} 

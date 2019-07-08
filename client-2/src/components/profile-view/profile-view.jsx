@@ -18,14 +18,15 @@ import './profile-view.scss';
 import { Link } from  'react-router-dom';
 
 function ProfileView(props) {
-  const profile = this.props.userObject;
-  const token = this.props.userObject.token;
+  const profile = props.userObject;
+  const token = props.userObject.token;
+  console.log('profileview token:',profile ? token : 'no token found')
   
   const [ username, setUsername ] = useState(profile.user.Username);
   const [ password, setPassword ] = useState(profile.user.Password);
   const [ email, setEmail ] = useState(profile.user.Email);
   const [ birthdate, setBirthdate ] = useState(profile.user.Birthdate);
-  const [ favoriteMoviesDetails ] = useState(props.movies);
+  const [ favoriteMovies] = useState(profile.user.FavoriteMovies);
 
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
@@ -65,7 +66,7 @@ function ProfileView(props) {
 
   function handleMovieDelete(movieId) {
     axios.delete(`https://my-movie-app-smb.herokuapp.com/users/${username}/${movieId}`, {
-      headers: {Authorization: `Bearer ${props.token}`}
+      headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
       //const data = response.data;
@@ -77,6 +78,23 @@ function ProfileView(props) {
     });
   }
 
+  function getFavoriteMoviesDetails() {
+   // const { movies, userObject } = this.props;
+    const { movies } = props;
+     console.log('gFMD movies:',props.movies);
+     let favoriteMoviesDetails = [];
+     //console.log('userObject:',userObject ? userObject : null);
+     //console.log('userObject.user.Username:', userObject.user.Username ? userObject.user.Username : 'does not exist');
+     //console.log('userObject.userObject.user.Username:', userObject.userObject.user.Username ? userObject.userObject.user.Username : 'does not exist');
+     if ((favoriteMovies != null) && 
+       (favoriteMovies.length > 0) && movies) {
+       favoriteMoviesDetails = movies.filter(movie => favoriteMovies.includes(movie._id));
+     }
+     console.log('favMoviesDetails:',favoriteMoviesDetails ? favoriteMoviesDetails : 'no fav movies found');
+     return favoriteMoviesDetails;
+   } 
+
+    const favoriteMoviesDetails = getFavoriteMoviesDetails();
     return (
     <div>
        <Container>
@@ -131,8 +149,10 @@ function ProfileView(props) {
         </Card.Body>
       </Card>
 
-      { favoriteMoviesDetails && (favoriteMoviesDetails.length > 0) &&
-        favoriteMoviesDetails.map(movie => 
+      { /*favoriteMoviesDetails && (favoriteMoviesDetails.length > 0) &&
+        favoriteMoviesDetails.map(movie => */
+          
+          favoriteMoviesDetails.map(movie =>
         <Card style={{ width: '16rem' }} key = {movie._id}>
           <Card.Body>
             <Card.Title>Title: {movie.Title}</Card.Title>
@@ -155,7 +175,8 @@ function ProfileView(props) {
         </div>
     );   
 }
-export default connect(({userObject}) => ({userObject}), { setUser } )(ProfileView);
+const mapStateToProps = ({movies, userObject}) => ({movies, userObject});
+export default connect( mapStateToProps, { setUser } )(ProfileView);
 
 /*ProfileView.propTypes = {
   profile: PropTypes.shape({

@@ -19,9 +19,12 @@ export default class GenreView extends React.Component {
   }
 
   render() {
-    const { genre } = this.props;
+    const { movie } = this.props;
+    console.log('gview, movie:', movie ? movie : 'no movie found');
+    console.log('gview, director:', movie ? movie.Genre.Name : 'no genre found');
+    if (!movie) return null;
 
-    if (!genre) return null;
+    const genre = movie.Genre;
 
 
     return (

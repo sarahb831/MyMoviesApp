@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -19,11 +19,12 @@ export default class DirectorView extends React.Component {
   }
 
   render() {
-    const { director } = this.props;
+    const { movie } = this.props;
 
-    if (!director) return null;
-
-
+    console.log('dview, movie:', movie ? movie : 'no movie found');
+    console.log('dview, director:', movie ? movie.Director : 'no director found');
+    if (!movie) return null;
+    if (movie && movie.Director ) {
     return (
       <Container>
       <Row>
@@ -31,11 +32,11 @@ export default class DirectorView extends React.Component {
         <Col xs={12} md={8}>
           <Card className = "director-view" style={{ width: '18rem' }}>
         <Card.Body>
-          <Card.Title className = "director-name">Director: {director.Name}</Card.Title>
-          <Card.Text className = "director-bio">Biography: {director.Bio}
+          <Card.Title className = "director-name">Director: {movie.Director.Name}</Card.Title>
+          <Card.Text className = "director-bio">Biography: {movie.Director.Bio}
           </Card.Text>
-          <Card.Text className = "director-birth">Birth: {director.Birth}</Card.Text>
-          <Card.Text className = "director-death">Death: {director.Death}</Card.Text>
+          <Card.Text className = "director-birth">Birth: {movie.Director.Birth}</Card.Text>
+          <Card.Text className = "director-death">Death: {movie.Director.Death}</Card.Text>
         </Card.Body>
         
         <Card.Body>
@@ -52,15 +53,16 @@ export default class DirectorView extends React.Component {
       </Row>
     </Container>
     );
+    } else return null;
   }
 }
 
-DirectorView.propTypes = {
+/*DirectorView.propTypes = {
   director: PropTypes.shape({
     Name: PropTypes.string,
     Bio: PropTypes.string,
     Birth: PropTypes.string,
     Death: PropTypes.string
   }).isRequired
-};
+};*/
 

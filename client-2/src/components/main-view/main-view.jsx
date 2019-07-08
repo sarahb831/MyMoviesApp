@@ -1,42 +1,29 @@
 import React from 'react';
-
 import axios from 'axios';
-
-import './main-view.scss';
-
+//import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import { setMovies } from  '../../actions/actions'; // to import relevant actions
 
 import MoviesList from '../movies-list/movies-list';
-
-
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from  '../login-view/login-view';
-// import MovieCard from '../movie-card/movie-card'; // not used for react-redux version
 import MovieView from '../movie-view/movie-view';
 import DirectorView from '../director-view/director-view';
 import GenreView from '../genre-view/genre-view';
 import ProfileView from '../profile-view/profile-view';
+
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
+import './main-view.scss';
 
 class MainView extends React.Component {
 
   /* keep? */
   constructor() {
     super();
-
     this.onLoggedIn = this.onLoggedIn.bind(this);
-   /* this.state = {
-      user: null,
-      movies: [],
-      userObject: {},
-      token: null
-    };*/
   }
   
   componentDidMount() {    
@@ -44,12 +31,6 @@ class MainView extends React.Component {
     const userObject = localStorage.getItem('userObject');
     if (userObject !== null) accessToken = userObject.token;
     if (userObject != null && accessToken != null) {
-     /* this.setState({
-        user: userObject.user.Username,
-        userObject,
-        token: accessToken
-        
-      });*/
       this.getMovies(accessToken);
     }
   }
@@ -70,21 +51,8 @@ class MainView extends React.Component {
 
   onLoggedIn() {
     const { userObject } = this.props;
-   /* console.log(authData.user.Username);
-    console.log(authData.token);
-   this.setState({
-      user: authData.user.Username,
-      userObject: authData,
-      token: authData.token
-    });
-  
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    localStorage.setItem('userObject', authData.user);
-    */
     this.getMovies(userObject.token);
   }
-
 
   handleLogout() {
     localStorage.removeItem('userObject');
@@ -92,29 +60,23 @@ class MainView extends React.Component {
     console.log("localStorage cleared");
   }
 
-  getFavoriteMoviesDetails() {
-   const { movies, userObject } = this.props;
-    console.log('gFMD movies:',movies);
-    let favoriteMoviesDetails = [];
-    console.log('userObject:',userObject ? userObject : null);
-    console.log('userObject.user.Username:', userObject.user.Username ? userObject.user.Username : 'does not exist');
-    console.log('userObject.userObject.user.Username:', userObject.userObject.user.Username ? userObject.userObject.user.Username : 'does not exist');
-    if ((userObject !== undefined) && 
-      (userObject.user.FavoriteMovies != null) && 
-      (userObject.user.FavoriteMovies.length > 0) && movies) {
-      favoriteMoviesDetails = movies.filter(movie => userObject.user.FavoriteMovies.includes(movie._id));
-    }
-    console.log('favMoviesDetails:',favoriteMoviesDetails ? favoriteMoviesDetails : 'no fav movies found');
-    return favoriteMoviesDetails;
-  } 
+  getMovie(movieId) {
+    const { movies } = this.props;
+    console.log('gMBD movies:',movies);
+    let movie;
+    if (movies != null)  {
+    // eslint-disable-next-line
+      const movie = movies.find(movie => movie._id == movieId); // note not strict equality here
+  
+      console.log('gMBD movie:',movie ? movie : 'no movie found');
+    }  
+    return movie;
+  }
 
   render() {
-    const { movies, userObject } = this.props;
-   // const { user, token, userObject } = this.state;
-    console.log('render, movies', movies);
-    console.log('render, userObject',userObject);
-    const username = userObject ? userObject.user.Username : null;
-    //const token = userObject ? userObject.token : null;
+    const { userObject } = this.props;
+    const username = userObject.user ? userObject.user.Username : null;
+   
     return ( 
       <div>
         <div>
@@ -126,15 +88,6 @@ class MainView extends React.Component {
               </Navbar.Text>
               }
               <Navbar.Collapse className="justify-content-end">
-                { username !== null && <Link to={`/users/${username}`}>
-                  <Button variant="link" 
-                    type="submit"
-                    className="button-profile"
-                    size="sm">
-                    Profile
-                  </Button>
-                </Link>
-                }
                 <Button
                   variant="primary"
                   type="submit"
@@ -150,7 +103,7 @@ class MainView extends React.Component {
         <div className = "main-view">
           <Route exact path="/" 
             render={() => {
-              if (!username) return <LoginView onLoggedIn={this.onLoggedIn} />;
+              if (!username) return <LoginView onLoggedIn={this.onLoggedIn} setUser={this.setUser}/>;
               return <MoviesList user={username}/>;
             }
           }/>
@@ -158,21 +111,25 @@ class MainView extends React.Component {
           <Route path="/register" render={() => <RegistrationView />} />
           <Route path="/movies/:movieId" 
             render={({match}) => <MovieView movieId={match.params.movieId}/>}/>
-          <Route  exact path="/genres/:name"
+          <Route  /*exact path="/genres/:name"
             render={({ match }) => {
-              if (!movies || !movies.length) return <div className="main-view"/>;
+             // if (!movies || !movies.length) return <div className="main-view"/>;
               return <GenreView genre={match.params.name}/>}
+              */
+              exact path="/genres/:movieId"
+              render={({match}) => {
+                return <GenreView movie={() => this.getMovie(match.params.movieId)}/>              }
               } />
-            <Route exact path="/directors/:name"
+            <Route exact path="/directors/:movieId"
             render={({match}) => {
-              if (!movies || !movies.length) return <div className="main-view"/>;
-              return <DirectorView director={match.params.name}/>}
+              return <DirectorView movie={() => this.getMovie(match.params.movieId)}/>}
             } />
             <Route exact path="/users/:Username"
               render={({match}) => {
-                if (!username) return <LoginView onLoggedIn={this.onLoggedIn} />;
+                if (!username) return <LoginView onLoggedIn={this.onLoggedIn}  setUser={this.setUser}/>;
                 return <ProfileView 
-                  movies={() => this.getFavoriteMoviesDetails()}/>;
+                  /*movies={() => this.getFavoriteMoviesDetails()}*/
+                  />;
               }
             }/>
         </div>
@@ -181,5 +138,10 @@ class MainView extends React.Component {
     );
   }
 }
+/*MainView.propTypes = {
+  setUser: PropTypes.func.isRequired
+};
+*/
+const mapStateToProps = ({ moviesApp, userObject, movies }) => ({ moviesApp, userObject, movies });
 
-export default connect(({moviesApp}) => ({moviesApp}), { setMovies } )(MainView);
+export default connect(mapStateToProps, { setMovies } )(MainView);

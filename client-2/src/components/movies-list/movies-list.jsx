@@ -20,18 +20,23 @@ const mapStateToProps = state => {
    console.log('movies[0]:',movies[0]);
     //console.log('movies.movies[0].Director.Name:' ,movies[0].Director.Name);
 
-    let moviesToShow = movies.concat().sort((a,b) => { // copies array with "concat()"
+    let moviesToShow = sortColumn === 'Title' ?
+    movies.concat().sort((a,b) => { // copies array with "concat()"
     console.log('a[sortColumn]:',a[sortColumn]);
     console.log('b[sortColumn]:',b[sortColumn]);
         if (a[sortColumn] < b[sortColumn]) return -1;
         if (a[sortColumn] > b[sortColumn]) return 1;
         return 0;
+    }): movies.concat().sort((a,b) => {
+        const realSort = sortColumn.split('.');
+        if (a[realSort[0]][realSort[1]] < b[realSort[0]][realSort[1]]) return -1;
+        if (a[realSort[0]][realSort[1]] > b[realSort[0]][realSort[1]]) return 1;
+        return 0;
     });
 
     if (visibilityFilter && visibilityFilter !== '') {
-        console.log('M-Link, visF:',visibilityFilter);
-        console.log('moviesToShow.:', moviesToShow);
-        moviesToShow = moviesToShow.filter(movie => movie.title.includes(visibilityFilter));
+        moviesToShow = moviesToShow.filter(movie => 
+            movie.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
     }
 
     return { movies: moviesToShow};  // sorted, filtered copy of "movies" is return as props

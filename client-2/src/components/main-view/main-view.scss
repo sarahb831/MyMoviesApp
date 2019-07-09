@@ -1,23 +1,25 @@
-$primary-color: #8aebe7; /* sea foam blue */
+$primary-color: #627abc; /* periwinkle */
+$backup-color: #8aebe7; /* sea foam blue */
 $secondary-color: #0086ad; /* darker blue */
 
 body {
   color: black;
   font-family: 'Poppins', sans-serif;
-  padding-top: 70px;
+  padding-top: 50px;
 }
 
 .main-view {
-    background-color: $primary-color;
+    background-color: black;
     color: black;
 }
 
 header {
+  background-color: $primary-color;
   font-weight: 700;
   font-size: 50px;
 }
 
 .button-primary .button-login {
-  background-color: $secondary-color;
+  background-color: $primary-color;
   color: black;
 }

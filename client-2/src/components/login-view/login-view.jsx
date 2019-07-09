@@ -1,6 +1,9 @@
 //login-view.jsx
 
 import React, { useState } from 'react';
+import { Link } from  'react-router-dom';
+import { connect } from 'react-redux';
+
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -8,9 +11,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './login-view.scss';
-
-import { Link } from  'react-router-dom';
-import { connect } from 'react-redux';
 
 import { setUser } from  '../../actions/actions'
 
@@ -31,16 +31,13 @@ function LoginView(props) {
     })
     .then(response => {
       const data = response.data;
-      console.log("LoginView data:",data);
       localStorage.setItem('userObject',data);
       props.setUser(data);
-
-      props.onLoggedIn(); //keep?
-     // window.location.href = "http://localhost:3000"; // return to main display after complete
+      props.onLoggedIn(); 
     })
     .catch(e => {
       console.log(e);
-      console.log('user not in system')
+      console.log('user not found in system')
     });
   };
 
@@ -64,28 +61,29 @@ function LoginView(props) {
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-              type="password"
-              value={password}
-              placeholder="Password"
-              onChange = {e => setPassword(e.target.value)}
-              required />
+                type="password"
+                value={password}
+                placeholder="Password"
+                onChange = {e => setPassword(e.target.value)}
+                required />
             </Form.Group>
 
             <Button
               variant="primary"
               type="submit"
               className = "button-primary"
-              onClick = {handleSubmit}>
+              onClick = {handleSubmit}
+              block>
               Login
             </Button>
             <Link to={`/register`}>
-            <Button 
-              variant="link" 
-              className = "button-primary">
-              Not registered yet? Sign up here
-            </Button>
-          </Link>
-
+              <Button 
+                variant="link" 
+                className = "button-primary"
+                block>
+                Not registered yet? Sign up here
+              </Button>
+            </Link>
           </Form>
         </Col>
         <Col>
@@ -97,6 +95,6 @@ function LoginView(props) {
 
 export default connect(null, { setUser } )(LoginView);
 
-  LoginView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
-  };
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired
+};

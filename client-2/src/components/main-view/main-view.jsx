@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-//import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -20,7 +19,6 @@ import './main-view.scss';
 
 class MainView extends React.Component {
 
-  /* keep? */
   constructor() {
     super();
     this.onLoggedIn = this.onLoggedIn.bind(this);
@@ -40,8 +38,6 @@ class MainView extends React.Component {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      // movies moved here now
-      console.log('in getMovies .then()');
       this.props.setMovies(response.data);
     })
     .catch(function (error) {
@@ -57,30 +53,26 @@ class MainView extends React.Component {
   handleLogout() {
     localStorage.removeItem('userObject');
     window.location.href = 'http://localhost:3000/';
-    console.log("localStorage cleared");
   }
 
   getMovie(movieId) {
     const { movies } = this.props;
-    console.log('gMBD movies:',movies);
     let movie;
     if (movies != null)  {
     // eslint-disable-next-line
       const movie = movies.find(movie => movie._id == movieId); // note not strict equality here
-  
-      console.log('gMBD movie:',movie ? movie : 'no movie found');
     }  
     return movie;
   }
 
   render() {
-    const { userObject } = this.props;
+    const { movies, userObject } = this.props;
     const username = userObject.user ? userObject.user.Username : null;
    
     return ( 
       <div>
         <div>
-          <Navbar bg="info" variant="light"fixed="top" 
+          <Navbar bg="dark" variant="dark" fixed="top" 
             className="sticky-navbar navbar navbar-default navbar-fixed-top">
               <Navbar.Brand href="#home">myMovies</Navbar.Brand>
               { username !== null && <Navbar.Text>
@@ -107,29 +99,26 @@ class MainView extends React.Component {
               return <MoviesList user={username}/>;
             }
           }/>
-  
           <Route path="/register" render={() => <RegistrationView />} />
-          <Route path="/movies/:movieId" 
+          <Route exact path="/movies/:movieId" 
             render={({match}) => <MovieView movieId={match.params.movieId}/>}/>
-          <Route  /*exact path="/genres/:name"
-            render={({ match }) => {
-             // if (!movies || !movies.length) return <div className="main-view"/>;
-              return <GenreView genre={match.params.name}/>}
-              */
-              exact path="/genres/:movieId"
-              render={({match}) => {
-                return <GenreView movie={() => this.getMovie(match.params.movieId)}/>              }
-              } />
-            <Route exact path="/directors/:movieId"
+          <Route exact path="/genres/:name"
             render={({match}) => {
-              return <DirectorView movie={() => this.getMovie(match.params.movieId)}/>}
+              return <GenreView genre={movies.find(movie => 
+                movie.Genre.Name === match.params.name).Genre}
+              />}
+          }/>
+          <Route exact path="/directors/:name"
+            render={({match}) => {
+              return <DirectorView 
+                director={movies.find(movie => 
+                  movie.Director.Name === match.params.name).Director}
+              />}
             } />
             <Route exact path="/users/:Username"
               render={({match}) => {
                 if (!username) return <LoginView onLoggedIn={this.onLoggedIn}  setUser={this.setUser}/>;
-                return <ProfileView 
-                  /*movies={() => this.getFavoriteMoviesDetails()}*/
-                  />;
+                return <ProfileView/>;
               }
             }/>
         </div>
@@ -138,10 +127,7 @@ class MainView extends React.Component {
     );
   }
 }
-/*MainView.propTypes = {
-  setUser: PropTypes.func.isRequired
-};
-*/
+
 const mapStateToProps = ({ moviesApp, userObject, movies }) => ({ moviesApp, userObject, movies });
 
 export default connect(mapStateToProps, { setMovies } )(MainView);

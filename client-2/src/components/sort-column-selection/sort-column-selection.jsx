@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
@@ -26,16 +25,7 @@ import { setSortColumn } from  '../../actions/actions';
     )
 }
 
-
 export default connect(
     ({sortColumn}) => ({sortColumn}), { setSortColumn }
 )(SortColumnSelection);
 
-
-
-
-/*SortColumnSelection.propTypes = {
-    setSortColumn: PropTypes.func.isRequired,
-    sortColumn: PropTypes.func.isRequired
-  };
-  */

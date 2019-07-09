@@ -17,8 +17,7 @@ export default function RegistrationView(props) {
   const [email, setEmail ] = useState('');
   const [ birthday, setBirthday ] = useState('');
 
- 
-  const handleRegistration = (e) => {
+   const handleRegistration = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/
     /* send request to server for registration */
     axios.post('https://my-movie-app-smb.herokuapp.com/users', {
@@ -86,7 +85,8 @@ export default function RegistrationView(props) {
                 variant="primary"
                 type="submit"
                 className = "button-primary"
-                onClick = {handleRegistration}>Register
+                onClick = {handleRegistration}
+                block>Register
               </Button>
             </Form>
           </Col>

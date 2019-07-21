@@ -42,12 +42,13 @@ function LoginView(props) {
   };
 
   return (
-    <Container>
+    <Container className="login-view">
       <Row>
         <Col></Col>
         <Col xs={12} md={8}>
           <Form>
             <Form.Group controlId="formBasicUsername">
+              <Form.Label><p></p></Form.Label>
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
@@ -83,6 +84,9 @@ function LoginView(props) {
                 block>
                 Not registered yet? Sign up here
               </Button>
+              <p></p>
+              <p></p>
+              <p></p>
             </Link>
           </Form>
         </Col>

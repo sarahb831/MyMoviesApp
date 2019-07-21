@@ -23,6 +23,10 @@
   color: ##0086ad;;
 }
 
+MainView {
+  height: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

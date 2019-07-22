@@ -58,7 +58,7 @@ app.use(bodyParser.json());
 
 var auth = require('./auth.js')(app); // so Express is available to auth.js also
 
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.send("Welcome to My Movies!");
 });
 

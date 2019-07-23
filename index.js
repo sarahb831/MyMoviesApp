@@ -42,7 +42,7 @@ const cors = require('cors');
 
 /* had been bypassed since client side built */
 var allowedOrigins = ['*', 'http://localhost:1234'];
-app.use(express.static(path.join(__dirname, 'client-2/build')));
+app.use(express.static(path.join(__dirname)));
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);

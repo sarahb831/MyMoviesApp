@@ -42,6 +42,7 @@ const cors = require('cors');
 
 /* had been bypassed since client side built */
 var allowedOrigins = ['*', 'http://localhost:1234'];
+app.use(express.static(path.join(__dirname, 'client-2/build')))
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -59,7 +60,7 @@ app.use(bodyParser.json());
 var auth = require('./auth.js')(app); // so Express is available to auth.js also
 
 app.get("/*", (req, res) => {
-  res.send("Welcome to My Movies!");
+  res.sendFile(path.join(__dirname, 'client-2/build', 'index.html'));
 });
 
 // log all requests

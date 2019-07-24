@@ -1,7 +1,8 @@
 const express = require("express"),
   morgan = require("morgan"),
   bodyParser = require("body-parser"),
-  uuid = require("uuid");
+  uuid = require("uuid"),
+  path = require("path");
 
 const mongoose = require("mongoose");
 const Models = require("./models.js");
@@ -42,7 +43,7 @@ const cors = require('cors');
 
 /* had been bypassed since client side built */
 var allowedOrigins = ['*', 'http://localhost:1234'];
-app.use(express.static(path.join(__dirname, 'client-2/build')));
+//app.use(express.static(path.join(__dirname, 'client-2/build')));
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -59,9 +60,10 @@ app.use(bodyParser.json());
 
 var auth = require('./auth.js')(app); // so Express is available to auth.js also
 
-app.get("/*", (req, res) => {
+/*app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, 'client-2/build', 'index.html'));
 });
+*/
 
 // log all requests
 app.use(morgan("common"));
@@ -314,6 +316,16 @@ app.use(express.static("public"));
 app.use(function(err, req, res, next) {
   console.error(err.stack);
 });
+
+if (process.env.NODE_ENV === 'production') {
+  //serve any static files
+  app.use(express.static(path.join(__dirname, 'client-2/build')));
+
+  // handle React routing, returning all request back to MyMovies app
+  app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client-2/build', 'index.html'));
+  });
+}
 
 var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function() {

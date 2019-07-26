@@ -8,8 +8,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "cd client-2 && yarn add react-scripts && yarn build",
-    "heroku-postbuild": "cd client-2 && npm install && npm install --only-dev --no-shrinkwrap && npm run build"
+    "build": "cd client && yarn add react-scripts && yarn build",
+    "heroku-postbuild": "cd client && npm install && npm install --only-dev --no-shrinkwrap && npm run build"
   },
   "author": "",
   "license": "ISC",

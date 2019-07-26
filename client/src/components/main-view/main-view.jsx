@@ -53,9 +53,9 @@ class MainView extends React.Component {
 
   handleLogout() {
       localStorage.removeItem('userObject');
-      if (window.location.port !== 0 && window.location.port !== 80) {
-        window.location.href = `${window.location.href}:${window.location.port}/`;
-      } else window.location.href = `${window.location.href}/`;
+      if (window.location.href === "localhost") {
+        window.location.href = `${window.location.href}:${window.location.port}`;
+      } else window.location.href = `${window.location.href}`;
   }
 
   getMovie(movieId) {

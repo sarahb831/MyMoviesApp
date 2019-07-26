@@ -29,7 +29,7 @@ export default function RegistrationView(props) {
     .then(response => {
       const data = response.data;
       console.log(data);
-      window.location.href = "http://localhost:3000";
+      window.location.href = `http://localhost:${window.location.port}`;
     })
     .catch(e => {
       console.log(e, ': error registering user')

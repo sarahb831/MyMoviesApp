@@ -39,11 +39,9 @@ const validator = require('express-validator');
 app.use(validator());
 
 const cors = require('cors');
-//app.use(cors());
 
 /* had been bypassed since client side built */
 var allowedOrigins = ['*', 'http://localhost:1234'];
-//app.use(express.static(path.join(__dirname, 'client-2/build')));
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -59,11 +57,6 @@ app.use(cors({
 app.use(bodyParser.json());
 
 var auth = require('./auth.js')(app); // so Express is available to auth.js also
-
-/*app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, 'client-2/build', 'index.html'));
-});
-*/
 
 // log all requests
 app.use(morgan("common"));
@@ -276,7 +269,7 @@ app.delete("/users/:Username/:MovieID",(req, res) => {
 });
 
 // delete user from the list of users
-// needs troubleshooting
+
 app.delete("/users/:Username", function(req, res) {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then(function(user) {
@@ -319,11 +312,11 @@ app.use(function(err, req, res, next) {
 
 if (process.env.NODE_ENV === 'production') {
   //serve any static files
-  app.use(express.static(path.join(__dirname, 'client-2/build')));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 
   // handle React routing, returning all request back to MyMovies app
   app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client-2/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
 

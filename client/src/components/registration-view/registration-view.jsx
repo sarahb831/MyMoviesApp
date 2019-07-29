@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 import './registration-view.scss';
 
-import axios from 'axios';
+import { postRequest } from '../../helpers/requester';
 
 export default function RegistrationView(props) {
   const [ username, setUsername ] = useState('');
@@ -20,7 +20,7 @@ export default function RegistrationView(props) {
    const handleRegistration = (e) => {
     e.preventDefault(); /* to prevent default refresh of page from this method*/
     /* send request to server for registration */
-    axios.post('https://my-movie-app-smb.herokuapp.com/users', {
+    postRequest('/users', {
       Username: username, 
       Password: password,
       Email: email,

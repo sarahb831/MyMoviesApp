@@ -16,7 +16,7 @@ import { setUser } from  '../../actions/actions'
 
 import PropTypes from 'prop-types';
 
-import axios from 'axios';
+import { postRequest } from '../../helpers/requester';
 
 function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -25,7 +25,7 @@ function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     /* send request to server for authentication */
-    axios.post('https://my-movie-app-smb.herokuapp.com/login', {
+    postRequest('/login', {
       Username: username,
       Password: password
     })

@@ -11,9 +11,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-import axios from 'axios';
-
 import './profile-view.scss';
+import { putRequest, deleteRequest } from '../../helpers/requester';
 
 function ProfileView(props) {
   const profile = props.userObject;
@@ -27,7 +26,7 @@ function ProfileView(props) {
   const handleProfileUpdate = (e) => {
     e.preventDefault(); 
     /* send request to server for update*/
-    axios.put(`https://my-movie-app-smb.herokuapp.com/users/${username}`, {
+    putRequest(`/users/${username}`, {
       headers: {Authorization: `Bearer ${token}`}
     },{
         Username: username,
@@ -47,7 +46,7 @@ function ProfileView(props) {
   const handleProfileDelete = (e) => {
     e.preventDefault(); 
     /* send request to server for update*/
-    axios.delete(`https://my-movie-app-smb.herokuapp.com/users/${username}`, {
+    deleteRequest(`/users/${username}`, {
       headers: {Authorization: `Bearer ${token}`}
     })
       .then(response => {
@@ -61,7 +60,7 @@ function ProfileView(props) {
   };
 
   function handleMovieDelete(movieId) {
-    axios.delete(`https://my-movie-app-smb.herokuapp.com/users/${username}/${movieId}`, {
+    deleteRequest(`/users/${username}/${movieId}`, {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {

@@ -3,6 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   uuid = require("uuid"),
   path = require("path");
+  require('dotenv').config()
 
 const mongoose = require("mongoose");
 const Models = require("./models.js");
@@ -26,7 +27,7 @@ const Users = Models.User;
 
 // use this version for connecting to MongoDB Atlas
   mongoose
-    .connect('mongodb+srv://smbeauchamp:Sundance885!@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
+    .connect('mongodb+srv://' + process.env.DB_LOGIN + '@smbcluster-byaox.mongodb.net/myMoviesDB?retryWrites=true',
       { useNewUrlParser: true }
     )
     .catch(function(err) {

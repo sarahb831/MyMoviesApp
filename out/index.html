@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>myMovies API</h1>
+<p>This API provides information on movies, directors and genres.  It also allows a user to register and create a list of
+favorite movies.</p>
+<h2>Endpoints</h2>
+<h4>Description</h4>
+<p>Get a list of all Movies</p>
+<h4>URL</h4>
+<p>/movies</p>
+<h4>Method</h4>
+<p>GET</p>
+<h4>Query Parameters</h4>
+<p>None</p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object containing data about all the Movies</p>
+<hr>
+<h4>Description</h4>
+<p>Get data about a single movie based on the movie title</p>
+<h4>URL</h4>
+<p>/movies/[Title]</p>
+<h4>Method</h4>
+<p>GET</p>
+<h4>Query Parameters</h4>
+<p><strong>Title</strong>, the title of the movie for which to obtain data</p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object containing data about the specified movie, containing a title, description, genre, director, image URL
+and if-featured properties.</p>
+<p><strong>Example</strong></p>
+<pre><code>  {
+
+    Title : &quot;The Godfather&quot;,    
+    Description : &quot;American crime film about the Mafia based on novel by Mario Puzo.&quot;,
+    Genre : {
+      Name: &quot;Crime&quot;,
+      Description: &quot;Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives.&quot;
+    },
+    Director : {
+      Name: &quot;Francis Ford Coppola&quot;,
+      Bio: &quot;Francis Ford Coppola was born in Michigan and has won
+      multiple Oscars.&quot;,
+      Birth: &quot;1939&quot;,
+      Death: &quot;-&quot;
+    },
+    ImagePath : &quot;https://www.rottentomatoes.com/m/godfather&quot;,
+    Featured : true
+}
+</code></pre>
+<hr>
+<h4>Description</h4>
+<p>Get movie data about a genre by title/genre</p>
+<h4>URL</h4>
+<p>/movies/list/:Genre<br></p>
+<h4>Method</h4>
+<p>GET</p>
+<h4>Query Parameters</h4>
+<p><strong>Genre</strong>, the genre of movies for which to obtain data<br></p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object containing data about the specified movie, containing a title, description, genre, director, image URL
+and if-featured properties.</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>Title : &quot;The Godfather&quot;,
+Description : &quot;American crime film about the Mafia based on novel by Mario Puzo.&quot;,
+Genre : {
+  Name: &quot;Crime&quot;,
+  Description: &quot;Crime fiction is a genre that fictionalizes crimes, their detection, criminals and their motives.&quot;
+},
+Director : {
+  Name: &quot;Francis Ford Coppola&quot;,
+  Bio: &quot;Francis Ford Coppola was born in Michigan and has won multiple Oscars.&quot;,
+  Birth: &quot;1939&quot;,
+  Death: &quot;-&quot;
+},
+ImagePath : &quot;https://www.rottentomatoes.com/m/godfather&quot;,
+Featured : true
+</code></pre>
+<p>}</p>
+<hr>
+<h4>Description</h4>
+<p>Get data about a director by name</p>
+<h4>URL</h4>
+<p>/movies/directors/[Name]</p>
+<h4>Method</h4>
+<p>GET</p>
+<h4>Query Parameters</h4>
+<p><strong>Name</strong>, the name of the director for whom to obtain data</p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object containing data about the specified director, containing a name, biography, birth year, and death year
+properties.</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>Name: &quot;Francis Ford Coppola&quot;,
+Bio: &quot;Francis Ford Coppola was born in Michigan and has won multiple Oscars.&quot;,
+Birth: &quot;1939&quot;,
+Death: &quot;-&quot;
+</code></pre>
+<p>}</p>
+<hr>
+<h4>Description</h4>
+<p>Add a new user</p>
+<h4>URL</h4>
+<p>/users</p>
+<h4>Method</h4>
+<p>POST</p>
+<h4>Query Parameters</h4>
+<p>None</p>
+<h4>Request Body Data Format</h4>
+<p>JSON object holding data about the user to add with username, password, email, date of birth</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>&quot;Username&quot; : &quot;Thor&quot;, (required)
+&quot;Password&quot; : &quot;Thor123&quot;, (required)
+&quot;Email&quot; : &quot;Thor@gmail.com&quot;, (required)
+&quot;Birthday&quot; : &quot;2012-08-01&quot;
+</code></pre>
+<p>}</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object containing data about the user that was added</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>&quot;Username&quot; : &quot;Thor&quot;,
+&quot;Password&quot; : &quot;Thor123&quot;,
+&quot;Email&quot; : &quot;Thor@gmail.com&quot;,
+&quot;Birthday&quot; : &quot;2012-08-01&quot;,
+&quot;FavoriteMovies&quot; : {_id: ObjectId(&quot;5cd8cee63e0876acb520d116&quot;)}
+</code></pre>
+<p>}</p>
+<hr>
+<h4>Description</h4>
+<p>Update a user's information</p>
+<h4>URL</h4>
+<p>/users/[Username]<br></p>
+<h4>Method</h4>
+<p>PUT</p>
+<h4>Query Parameters</h4>
+<p><strong>Username</strong>, the current username for this user password<br></p>
+<h4>Request Body Data Format</h4>
+<p>JSON object holding data about the user to update with username, password, email, date of birth.</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>&quot;Username&quot; : &quot;Thor&quot;,
+&quot;Password&quot; : &quot;Thor123&quot;,
+&quot;Email&quot; : &quot;MrThor@gmail.com&quot;,
+&quot;Birthday&quot; : &quot;2012-08-01&quot;
+</code></pre>
+<p>}</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object showing the updated information</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>&quot;Username&quot; : &quot;Thor&quot;,
+&quot;Password&quot; : &quot;Thor123&quot;,
+&quot;Email&quot; : &quot;MrThor@gmail.com&quot;,
+&quot;Birthday&quot; : &quot;2012-08-01&quot;,
+</code></pre>
+<p>}</p>
+<hr>
+<h4>Description</h4>
+<p>Add a movie to a user's list of favorites by username and movie title</p>
+<h4>URL</h4>
+<p>/users/[Username]/Movies/[MovieID]</p>
+<h4>Method</h4>
+<p>POST</p>
+<h4>Query Parameters</h4>
+<p><strong>Username</strong>, the current username for this user
+<strong>MovieID</strong>, the ID of the movie to be added</p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>JSON object showing the updated information</p>
+<p><strong>Example</strong>:</p>
+<p>{</p>
+<pre><code>&quot;Username&quot; : &quot;Thor&quot;,
+&quot;Password&quot; : &quot;Thor123&quot;,
+&quot;FavoriteMovies&quot; : [&quot;5cd8cee63e0876acb520d115&quot;]
+</code></pre>
+<h2>}</h2>
+<h4>Description</h4>
+<p>Delete a movie from a user's list of favorites by username and movie ID</p>
+<h4>URL</h4>
+<p>/users/[Username]/[MovieID]</p>
+<h4>Method</h4>
+<p>DELETE</p>
+<h4>Query Parameters</h4>
+<p><strong>Username</strong>, the current username for this user
+<strong>MovieID</strong>, the ID of the movie to be deleted<br></p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>Text message indicating whether or not the movie was successfully deleted from the list of favorites.</p>
+<hr>
+<h4>Description</h4>
+<p>Delete a user from the list of users by username</p>
+<h4>URL</h4>
+<p>/users/[Username]</p>
+<h4>Method</h4>
+<p>DELETE</p>
+<h4>Query Parameters</h4>
+<p><strong>Username</strong>, username for the user being deleted<br></p>
+<h4>Request Body Data Format</h4>
+<p>None</p>
+<h4>Response Body Data Format</h4>
+<p>Text message indicating whether or not the user was successfully deleted from the users list.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#generateJWTToken">generateJWTToken</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sun Oct 13 2019 12:37:49 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

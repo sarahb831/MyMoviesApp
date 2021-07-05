@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -17,6 +16,7 @@ import ProfileView from '../profile-view/profile-view';
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import './main-view.scss';
+import { getRequest } from '../../helpers/requester';
 
 class MainView extends React.Component {
 
@@ -35,7 +35,7 @@ class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('https://my-movie-app-smb.herokuapp.com/movies', {
+    getRequest('/movies', {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
